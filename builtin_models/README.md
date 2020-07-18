@@ -28,4 +28,4 @@ Run `go test -run InstanceSegmentation`
 
 | Name                          | Image                                   | Label | Probability |
 |:-----------------------------:|:---------------------------------------:|:-----:|:-----------:|
-| OnnxVision_Mask_RCNN_R_50_FPN | ../predictor/_fixtures/lane_control.jpg | car   | 0.972       |
+| OnnxVision_Mask_RCNN_R_50_FPN | ../predictor/_fixtures/lane_control.jpg | car   | 0.993       |
