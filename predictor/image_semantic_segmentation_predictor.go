@@ -22,15 +22,15 @@ import (
 	gotensor "gorgonia.org/tensor"
 )
 
-// ObjectDetectionPredictor ...
-type ObjectDetectionPredictor struct {
+// SemanticSegmentationPredictor ...
+type SemanticSegmentationPredictor struct {
 	common.ImagePredictor
 	predictor *goonnxruntime.Predictor
 	labels             []string
 }
 
 // New ...
-func NewObjectDetectionPredictor(model dlframework.ModelManifest, os ...options.Option) (common.Predictor, error) {
+func NewSemanticSegmentationPredictor(model dlframework.ModelManifest, os ...options.Option) (common.Predictor, error) {
 	opts := options.New(os...)
 	ctx := opts.Context()
 
@@ -46,13 +46,13 @@ func NewObjectDetectionPredictor(model dlframework.ModelManifest, os ...options.
 		return nil, errors.New("input type not supported")
 	}
 
-	predictor := new(ObjectDetectionPredictor)
+	predictor := new(SemanticSegmentationPredictor)
 
 	return predictor.Load(ctx, model, os...)
 }
 
 // Download ...
-func (p *ObjectDetectionPredictor) Download(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) error {
+func (p *SemanticSegmentationPredictor) Download(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) error {
 	framework, err := model.ResolveFramework()
 	if err != nil {
 		return err
@@ -63,7 +63,7 @@ func (p *ObjectDetectionPredictor) Download(ctx context.Context, model dlframewo
 		return err
 	}
 
-	ip := &ObjectDetectionPredictor{
+	ip := &SemanticSegmentationPredictor{
 		ImagePredictor: common.ImagePredictor{
 			Base: common.Base{
 				Framework: framework,
@@ -82,7 +82,7 @@ func (p *ObjectDetectionPredictor) Download(ctx context.Context, model dlframewo
 }
 
 // Load ...
-func (p *ObjectDetectionPredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
+func (p *SemanticSegmentationPredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
 	framework, err := model.ResolveFramework()
 	if err != nil {
 		return nil, err
@@ -93,7 +93,7 @@ func (p *ObjectDetectionPredictor) Load(ctx context.Context, model dlframework.M
 		return nil, err
 	}
 
-	ip := &ObjectDetectionPredictor{
+	ip := &SemanticSegmentationPredictor{
 		ImagePredictor: common.ImagePredictor{
 			Base: common.Base{
 				Framework: framework,
@@ -115,7 +115,7 @@ func (p *ObjectDetectionPredictor) Load(ctx context.Context, model dlframework.M
 	return ip, nil
 }
 
-func (p *ObjectDetectionPredictor) download(ctx context.Context) error {
+func (p *SemanticSegmentationPredictor) download(ctx context.Context) error {
 	span, ctx := tracer.StartSpanFromContext(
 		ctx,
 		tracer.APPLICATION_TRACE,
@@ -172,7 +172,7 @@ func (p *ObjectDetectionPredictor) download(ctx context.Context) error {
 	return nil
 }
 
-func (p *ObjectDetectionPredictor) loadPredictor(ctx context.Context) error {
+func (p *SemanticSegmentationPredictor) loadPredictor(ctx context.Context) error {
 	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "load_predictor")
 	defer span.Finish()
 
@@ -217,7 +217,7 @@ func (p *ObjectDetectionPredictor) loadPredictor(ctx context.Context) error {
 }
 
 // Predict ...
-func (p *ObjectDetectionPredictor) Predict(ctx context.Context, data interface{}, opts ...options.Option) error {
+func (p *SemanticSegmentationPredictor) Predict(ctx context.Context, data interface{}, opts ...options.Option) error {
 	if data == nil {
 		return errors.New("input data nil")
 	}
@@ -231,7 +231,7 @@ func (p *ObjectDetectionPredictor) Predict(ctx context.Context, data interface{}
 	dims := append([]int{len(gotensors)}, fst.Shape()...)
 	// debug
 	pp.Println(dims)
-	// TODO support data types other than float32
+	// TODO: support data types other than float32
 	var input []float32
 	for _, t := range gotensors {
 		input = append(input, t.Float32s()...)
@@ -252,88 +252,67 @@ func (p *ObjectDetectionPredictor) Predict(ctx context.Context, data interface{}
 }
 
 // ReadPredictedFeatures ...
-func (p *ObjectDetectionPredictor) ReadPredictedFeatures(ctx context.Context) ([]dlframework.Features, error) {
+func (p *SemanticSegmentationPredictor) ReadPredictedFeatures(ctx context.Context) ([]dlframework.Features, error) {
 	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features")
 	defer span.Finish()
 
 	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+
+	labels, err := p.GetLabels()
 	if err != nil {
-		return nil, err
+		return nil, errors.New("cannot get the labels")
 	}
 
-	boxes_layer_index, err := p.GetOutputLayerIndex("boxes_layer")
-	if err != nil {
-		return nil, err
-	}
-	boxes := outputs[boxes_layer_index].Data().([]float32)
+	output_array := outputs[0].Data().([]float32)
+	output_batch := outputs[0].Shape()[0]
+	output_feature := outputs[0].Shape()[1]
+	output_height := outputs[0].Shape()[2]
+	output_width := outputs[0].Shape()[3]
 
-	var probabilities []float32
-	var classes []float32
-
-	probabilities_layer_index, err := p.GetOutputLayerIndex("probabilities_layer")
-	if err != nil {
-		return nil, err
-	}
-	raw_probabilities := outputs[probabilities_layer_index].Data().([]float32)
-
-	classes_layer_index, err := p.GetOutputLayerIndex("classes_layer")
-	if err != nil {
-		return nil, err
-	}
-	raw_input_classes := outputs[classes_layer_index]
-
-	// convert int64 to float32 if necessary
-	if classes_layer_index == probabilities_layer_index {
-		for curObj := 0; curObj < len(boxes)/4; curObj++ {
-			max_score := raw_probabilities[curObj*len(p.labels)]
-			var max_index int
-			max_index = 0
-			for i := 1; i < len(p.labels); i++ {
-				sc := raw_probabilities[curObj*len(p.labels)+i]
-				if sc > max_score {
-					max_score = sc
-					max_index = i
+	// convert the output in order to make it compatible with CreateSemanticSegmentFeatures function call
+	masks := make([][][]int64, output_batch)
+	for b := 0; b < output_batch; b++ {
+		masks[b] = make([][]int64, output_height)
+		for h := 0; h < output_height; h++ {
+			masks[b][h] = make([]int64, output_width)
+			for w := 0; w < output_width; w++ {
+				idx := 0
+				cur := output_array[b*output_feature*output_height*output_width+idx*output_height*output_width+h*output_width+w]
+				for f := 1; f < output_feature; f++ {
+					if output_array[b*output_feature*output_height*output_width+f*output_height*output_width+h*output_width+w] > cur {
+						idx = f
+						cur = output_array[b*output_feature*output_height*output_width+idx*output_height*output_width+h*output_width+w]
+					}
 				}
+				masks[b][h][w] = int64(idx)
 			}
-			probabilities = append(probabilities, float32(max_score))
-			classes = append(classes, float32(max_index))
-		}
-	} else {
-		probabilities = raw_probabilities
-		if raw_input_classes.Dtype() != gotensor.Float32 {
-			raw_classes := raw_input_classes.Data().([]int64)
-			for i := 0; i < len(raw_classes); i++ {
-				classes = append(classes, float32(raw_classes[i]))
-			}
-		} else {
-			classes = raw_input_classes.Data().([]float32)
 		}
 	}
 
-	return p.CreateBoundingBoxFeatures(ctx, probabilities, classes, boxes, p.labels)
+	return p.CreateSemanticSegmentFeatures(ctx, masks, labels)
 }
 
 // Reset ...
-func (p *ObjectDetectionPredictor) Reset(ctx context.Context) error {
+func (p *SemanticSegmentationPredictor) Reset(ctx context.Context) error {
 	return nil
 }
 
 // Close ...
-func (p *ObjectDetectionPredictor) Close() error {
+func (p *SemanticSegmentationPredictor) Close() error {
 	if p.predictor != nil {
 		p.predictor.Close()
 	}
 	return nil
 }
 
-func (p *ObjectDetectionPredictor) Modality() (dlframework.Modality, error) {
-	return dlframework.ImageObjectDetectionModality, nil
+func (p *SemanticSegmentationPredictor) Modality() (dlframework.Modality, error) {
+	return dlframework.ImageSemanticSegmentationModality, nil
 }
 
 func init() {
 	config.AfterInit(func() {
 		framework := onnxruntime.FrameworkManifest
-		agent.AddPredictor(framework, &ObjectDetectionPredictor{
+		agent.AddPredictor(framework, &SemanticSegmentationPredictor{
 			ImagePredictor: common.ImagePredictor{
 				Base: common.Base{
 					Framework: framework,
