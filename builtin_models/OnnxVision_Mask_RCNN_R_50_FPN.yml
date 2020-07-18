@@ -1,0 +1,57 @@
+name: OnnxVision_Mask_RCNN_R_50_FPN # name of your model
+framework:
+    name: Onnxruntime # framework for the model
+    version: 1.3.1 # framework version constraint
+version: 1.0 # version information in semantic version format
+container: # containers used to perform model prediction
+    # multiple platforms can be specified
+    amd64:
+        cpu: raiproject/carml-onnxruntime:amd64-cpu
+        gpu: raiproject/carml-onnxruntime:amd64-gpu
+    ppc64le:
+        cpu: raiproject/carml-onnxruntime:ppc64le-gpu
+        gpu: raiproject/carml-onnxruntime:ppc64le-gpu
+description: >
+    This model is a real-time neural network for object instance segmentation that detects 80 different classes.
+    This model only allows batchsize = 1 currently.
+references: # references to papers / websites / etc.. describing the model
+    - https://github.com/onnx/models/tree/master/vision/object_detection_segmentation/mask-rcnn
+# license of the model
+license: unrestricted
+# inputs to the model
+inputs:
+    # first input type for the model
+    - type: image
+      # description of the first input
+      description: the input image
+      parameters: # type parameters
+          element_type: float32
+          input_layer: 0
+          layout: CHW
+          color_mode: BGR
+          dimensions: [3, 800, 800]
+          mean: [102.9801, 115.9465, 122.7717]
+          scale: 1
+output:
+    # the type of the output
+    type: boundingbox
+    # a description of the output parameter
+    description: the output bounding box # a description of the output parameter
+    parameters:
+        classes_layer: 1
+        boxes_layer: 0
+        probabilities_layer: 2
+        masks_layer: 3
+        features_url: https://s3.amazonaws.com/store.carml.org/synsets/coco/coco_labels_2014_2017_background.txt
+        features_checksum: e7103a997c945e0f87c49a03c9c56a1b
+model: # specifies model graph and weights resources
+    graph_path: https://s3.amazonaws.com/store.carml.org/models/onnxruntime/onnxvision_mask_rcnn_r_50_fpn.onnx
+    is_archive:
+        false # if set, then the base_url is a url to an archive
+        # the graph_path and weights_path then denote the
+        # file names of the graph and weights within the archive
+    graph_checksum: ba1088fe5c4a9182075f3ce136037968
+attributes: # extra network attributes
+    kind: CNN # the kind of neural network (CNN, RNN, ...)
+    training_dataset: COCO 2017 # dataset used to for training
+    manifest_author: Yen-Hsiang Chang
