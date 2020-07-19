@@ -10,6 +10,25 @@ Run `go test -run ImageClassification`
 | Name                        | Image                               | Label                  | Score       |
 |:---------------------------:|:-----------------------------------:|:----------------------:|:-----------:|
 | TorchVision_AlexNet         | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 15.774      |
+| TorchVision_DenseNet_121    | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 22.642      |
+| TorchVision_DenseNet_161    | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 28.404      |
+| TorchVision_DenseNet_169    | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 18.400      |
+| TorchVision_DenseNet_201    | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 23.355      |
+| TorchVision_Resnet_18       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 22.512      |
+| TorchVision_Resnet_34       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 19.874      |
+| TorchVision_Resnet_50       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 21.993      |
+| TorchVision_Resnet_101      | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 20.871      |
+| TorchVision_Resnet_152      | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 23.554      |
+| TorchVision_SqueezeNet_v1.0 | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 31.827      |
+| TorchVision_SqueezeNet_v1.1 | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 29.821      |
+| TorchVision_VGG_11          | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 24.545      |
+| TorchVision_VGG_11_BN       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 19.582      |
+| TorchVision_VGG_13          | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 19.220      |
+| TorchVision_VGG_13_BN       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 24.030      |
+| TorchVision_VGG_16          | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 19.791      |
+| TorchVision_VGG_16_BN       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 22.744      |
+| TorchVision_VGG_19          | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 19.382      |
+| TorchVision_VGG_19_BN       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 23.698      |
 
 ### Image Object Detection
 Run `go test -run ObjectDetection`
