@@ -9,6 +9,20 @@ Run `go test -run ImageClassification`
 
 | Name                        | Image                               | Label                  | Score       |
 |:---------------------------:|:-----------------------------------:|:----------------------:|:-----------:|
+| Caffe_ResNet_101            | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 18.026      |
+| Inception_ResNet_v2.0       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  9.391      |
+| Inception_v3.0              | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 14.094      |
+| NasNet_A_Large              | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  9.284      |
+| NasNet_A_Mobile             | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  9.658      |
+| PNasNet_5_Large             | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  8.840      |
+| PolyNet                     | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 22.046      |
+| ResNext101_32x4D            | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 18.788      |
+| ResNext101_64x4D            | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 21.068      |
+| SE_ResNet_50                | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  7.394      |
+| SE_ResNet_101               | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  7.944      |
+| SE_ResNet_152               | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  8.439      |
+| SE_ResNext_50_32x4D         | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 13.578      |
+| SE_ResNext_101_32x4D        | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  9.021      |
 | TorchVision_AlexNet         | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 15.774      |
 | TorchVision_DenseNet_121    | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 22.642      |
 | TorchVision_DenseNet_161    | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 28.404      |
@@ -29,6 +43,7 @@ Run `go test -run ImageClassification`
 | TorchVision_VGG_16_BN       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 22.744      |
 | TorchVision_VGG_19          | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 19.382      |
 | TorchVision_VGG_19_BN       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 23.698      |
+| Xception                    | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  9.881      |
 
 ### Image Object Detection
 Run `go test -run ObjectDetection`

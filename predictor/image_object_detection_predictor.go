@@ -284,6 +284,7 @@ func (p *ObjectDetectionPredictor) ReadPredictedFeatures(ctx context.Context) ([
 
 	// convert int64 to float32 if necessary
 	if classes_layer_index == probabilities_layer_index {
+		// for MobileNet_SSD_v1.0 and MobileNet_SSD_Lite_v2.0
 		for curObj := 0; curObj < len(boxes)/4; curObj++ {
 			max_score := raw_probabilities[curObj*len(p.labels)]
 			var max_index int
@@ -299,6 +300,7 @@ func (p *ObjectDetectionPredictor) ReadPredictedFeatures(ctx context.Context) ([
 			classes = append(classes, float32(max_index))
 		}
 	} else {
+		// for OnnxVision_SSD
 		probabilities = raw_probabilities
 		if raw_input_classes.Dtype() != gotensor.Float32 {
 			raw_classes := raw_input_classes.Data().([]int64)
