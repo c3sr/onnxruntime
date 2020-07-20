@@ -26,7 +26,7 @@ import (
 type InstanceSegmentationPredictor struct {
 	common.ImagePredictor
 	predictor *goonnxruntime.Predictor
-	labels             []string
+	labels    []string
 }
 
 // New ...
@@ -274,7 +274,7 @@ func (p *InstanceSegmentationPredictor) ReadPredictedFeatures(ctx context.Contex
 
 	boxes := make([][]float32, nbox)
 	for nb := 0; nb < nbox; nb++ {
-		boxes[nb] = raw_boxes[nb*4:nb*4+4]
+		boxes[nb] = raw_boxes[nb*4 : nb*4+4]
 	}
 
 	probabilities_layer_index, err := p.GetOutputLayerIndex("probabilities_layer")
@@ -324,7 +324,7 @@ func (p *InstanceSegmentationPredictor) ReadPredictedFeatures(ctx context.Contex
 		classes = input_classes.Data().([]float32)
 	}
 
-	return p.CreateInstanceSegmentFeatures(ctx, [][]float32{probabilities,}, [][]float32{classes,}, [][][]float32{boxes,}, [][][][]float32{masks,}, p.labels)
+	return p.CreateInstanceSegmentFeatures(ctx, [][]float32{probabilities}, [][]float32{classes}, [][][]float32{boxes}, [][][][]float32{masks}, p.labels)
 }
 
 // Reset ...

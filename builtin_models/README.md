@@ -81,3 +81,10 @@ Run `go test -run SemanticSegmentation`
 |:-------------------------------:|:---------------------------------------:|:----------------------------:|
 | TorchVision_DeepLabv3_Resnet101 | ../predictor/_fixtures/lane_control.jpg | 7 (car)                      |
 | TorchVision_FCN_Resnet101       | ../predictor/_fixtures/lane_control.jpg | 7 (car)                      |
+
+### Image Enhancement
+Run `go test -run ImageEnhancement`
+
+| Name                        | Image                               | (R, G, B) at (0, 0) (top-left corner) |
+|:---------------------------:|:-----------------------------------:|:-------------------------------------:|
+| SRGAN_v1.0                  | ../predictor/_fixtures/penguin.png  | (0xc2, 0xc2, 0xc6)                    |

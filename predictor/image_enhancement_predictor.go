@@ -1,9 +1,7 @@
 package predictor
 
 import (
-	"bufio"
 	"context"
-	"os"
 	"strings"
 
 	"github.com/k0kubun/pp"
@@ -22,15 +20,15 @@ import (
 	gotensor "gorgonia.org/tensor"
 )
 
-// ImageClassificationPredictor ...
-type ImageClassificationPredictor struct {
+// ImageEnhancementPredictor ...
+type ImageEnhancementPredictor struct {
 	common.ImagePredictor
 	predictor *goonnxruntime.Predictor
-	labels    []string
+	images    interface{}
 }
 
 // New ...
-func NewImageClassificationPredictor(model dlframework.ModelManifest, os ...options.Option) (common.Predictor, error) {
+func NewImageEnhancementPredictor(model dlframework.ModelManifest, os ...options.Option) (common.Predictor, error) {
 	opts := options.New(os...)
 	ctx := opts.Context()
 
@@ -46,13 +44,13 @@ func NewImageClassificationPredictor(model dlframework.ModelManifest, os ...opti
 		return nil, errors.New("input type not supported")
 	}
 
-	predictor := new(ImageClassificationPredictor)
+	predictor := new(ImageEnhancementPredictor)
 
 	return predictor.Load(ctx, model, os...)
 }
 
 // Download ...
-func (p *ImageClassificationPredictor) Download(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) error {
+func (p *ImageEnhancementPredictor) Download(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) error {
 	framework, err := model.ResolveFramework()
 	if err != nil {
 		return err
@@ -63,7 +61,7 @@ func (p *ImageClassificationPredictor) Download(ctx context.Context, model dlfra
 		return err
 	}
 
-	ip := &ImageClassificationPredictor{
+	ip := &ImageEnhancementPredictor{
 		ImagePredictor: common.ImagePredictor{
 			Base: common.Base{
 				Framework: framework,
@@ -82,7 +80,7 @@ func (p *ImageClassificationPredictor) Download(ctx context.Context, model dlfra
 }
 
 // Load ...
-func (p *ImageClassificationPredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
+func (p *ImageEnhancementPredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
 	framework, err := model.ResolveFramework()
 	if err != nil {
 		return nil, err
@@ -93,7 +91,7 @@ func (p *ImageClassificationPredictor) Load(ctx context.Context, model dlframewo
 		return nil, err
 	}
 
-	ip := &ImageClassificationPredictor{
+	ip := &ImageEnhancementPredictor{
 		ImagePredictor: common.ImagePredictor{
 			Base: common.Base{
 				Framework: framework,
@@ -115,7 +113,7 @@ func (p *ImageClassificationPredictor) Load(ctx context.Context, model dlframewo
 	return ip, nil
 }
 
-func (p *ImageClassificationPredictor) download(ctx context.Context) error {
+func (p *ImageEnhancementPredictor) download(ctx context.Context) error {
 	span, ctx := tracer.StartSpanFromContext(
 		ctx,
 		tracer.APPLICATION_TRACE,
@@ -155,46 +153,15 @@ func (p *ImageClassificationPredictor) download(ctx context.Context) error {
 		}
 	}
 
-	span.LogFields(
-		olog.String("event", "download features"),
-	)
-	checksum := p.GetFeaturesChecksum()
-	if checksum != "" {
-		if _, _, err := downloadmanager.DownloadFile(p.GetFeaturesUrl(), p.GetFeaturesPath(), downloadmanager.MD5Sum(checksum)); err != nil {
-			return err
-		}
-	} else {
-		if _, _, err := downloadmanager.DownloadFile(p.GetFeaturesUrl(), p.GetFeaturesPath()); err != nil {
-			return err
-		}
-	}
-
 	return nil
 }
 
-func (p *ImageClassificationPredictor) loadPredictor(ctx context.Context) error {
+func (p *ImageEnhancementPredictor) loadPredictor(ctx context.Context) error {
 	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "load_predictor")
 	defer span.Finish()
 
 	span.LogFields(
-		olog.String("event", "read features"),
-	)
-
-	var labels []string
-	f, err := os.Open(p.GetFeaturesPath())
-	if err != nil {
-		return errors.Wrapf(err, "cannot read %s", p.GetFeaturesPath())
-	}
-	defer f.Close()
-	scanner := bufio.NewScanner(f)
-	for scanner.Scan() {
-		line := scanner.Text()
-		labels = append(labels, line)
-	}
-	p.labels = labels
-
-	span.LogFields(
-		olog.String("event", "creating predictor"),
+		olog.String("event", "load predictor"),
 	)
 
 	opts, err := p.GetPredictionOptions()
@@ -217,8 +184,7 @@ func (p *ImageClassificationPredictor) loadPredictor(ctx context.Context) error 
 }
 
 // Predict ...
-func (p *ImageClassificationPredictor) Predict(ctx context.Context, data interface{}, opts ...options.Option) error {
-
+func (p *ImageEnhancementPredictor) Predict(ctx context.Context, data interface{}, opts ...options.Option) error {
 	if data == nil {
 		return errors.New("input data nil")
 	}
@@ -250,10 +216,11 @@ func (p *ImageClassificationPredictor) Predict(ctx context.Context, data interfa
 	}
 
 	return nil
+
 }
 
 // ReadPredictedFeatures ...
-func (p *ImageClassificationPredictor) ReadPredictedFeatures(ctx context.Context) ([]dlframework.Features, error) {
+func (p *ImageEnhancementPredictor) ReadPredictedFeatures(ctx context.Context) ([]dlframework.Features, error) {
 	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features")
 	defer span.Finish()
 
@@ -262,30 +229,53 @@ func (p *ImageClassificationPredictor) ReadPredictedFeatures(ctx context.Context
 		return nil, err
 	}
 
-	return p.CreateClassificationFeatures(ctx, outputs[0], p.labels)
-}
+	output_array := outputs[0].Data().([]float32)
+	output_batch := outputs[0].Shape()[0]
+	output_channels := outputs[0].Shape()[1]
+	output_height := outputs[0].Shape()[2]
+	output_width := outputs[0].Shape()[3]
 
-// Reset ...
-func (p *ImageClassificationPredictor) Reset(ctx context.Context) error {
-	return nil
-}
-
-// Close ...
-func (p *ImageClassificationPredictor) Close() error {
-	if p.predictor != nil {
-		p.predictor.Close()
+	// convert 1D array to a 4D array in order to make it compatible with CreateRawImageFeatures function call
+	e := make([][][][]float32, output_batch)
+	for b := 0; b < output_batch; b++ {
+		e[b] = make([][][]float32, output_height)
+		for h := 0; h < output_height; h++ {
+			e[b][h] = make([][]float32, output_width)
+			for w := 0; w < output_width; w++ {
+				e[b][h][w] = make([]float32, 3)
+			}
+		}
 	}
+	for b := 0; b < output_batch; b++ {
+		for h := 0; h < output_height; h++ {
+			for w := 0; w < output_width; w++ {
+				e[b][h][w][0] = output_array[b*output_height*output_width*output_channels+0*output_height*output_width+h*output_width+w]
+				e[b][h][w][1] = output_array[b*output_height*output_width*output_channels+1*output_height*output_width+h*output_width+w]
+				e[b][h][w][2] = output_array[b*output_height*output_width*output_channels+2*output_height*output_width+h*output_width+w]
+			}
+		}
+	}
+
+	return p.CreateRawImageFeatures(ctx, e)
+}
+
+func (p *ImageEnhancementPredictor) Reset(ctx context.Context) error {
+
 	return nil
 }
 
-func (p *ImageClassificationPredictor) Modality() (dlframework.Modality, error) {
-	return dlframework.ImageClassificationModality, nil
+func (p *ImageEnhancementPredictor) Close() error {
+	return nil
+}
+
+func (p ImageEnhancementPredictor) Modality() (dlframework.Modality, error) {
+	return dlframework.ImageEnhancementModality, nil
 }
 
 func init() {
 	config.AfterInit(func() {
 		framework := onnxruntime.FrameworkManifest
-		agent.AddPredictor(framework, &ImageClassificationPredictor{
+		agent.AddPredictor(framework, &ImageEnhancementPredictor{
 			ImagePredictor: common.ImagePredictor{
 				Base: common.Base{
 					Framework: framework,

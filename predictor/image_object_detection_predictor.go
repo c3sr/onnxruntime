@@ -26,7 +26,7 @@ import (
 type ObjectDetectionPredictor struct {
 	common.ImagePredictor
 	predictor *goonnxruntime.Predictor
-	labels             []string
+	labels    []string
 }
 
 // New ...
