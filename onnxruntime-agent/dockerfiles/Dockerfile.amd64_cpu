@@ -24,11 +24,11 @@ WORKDIR $GOPATH/src/$PKG
 
 RUN git clone --depth=1 --branch=master https://${PKG}.git .
 
-RUN dep ensure -v -no-vendor
+RUN dep ensure -v -vendor-only
 
 RUN go build -tags=nogpu -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
     cd onnxruntime-agent && \
-    go onnxruntime -tags=nogpu && \
+    go build -tags=nogpu && \
     cd ..
 
 ENTRYPOINT ["onnxruntime-agent"]
