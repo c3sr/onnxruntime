@@ -1,4 +1,4 @@
-FROM carml/go-onnxruntime:amd64-cpu-latest
+FROM carml/go-onnxruntime:amd64-gpu-latest
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -19,16 +19,16 @@ LABEL org.onnxruntime.agent.build-date=$BUILD_DATE \
 
 
 # Get Go bindings
-ENV PKG github.com/rai-project/onnxruntime_dev
+ENV PKG github.com/yhchang3/onnxruntime_dev
 WORKDIR $GOPATH/src/$PKG
 
 RUN git clone --depth=1 --branch=master https://${PKG}.git .
 
 RUN dep ensure -v -vendor-only
 
-RUN go build -tags=nogpu -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
+RUN go build -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
     cd onnxruntime-agent && \
-    go build -tags=nogpu && \
+    go build && \
     cd ..
 
 ENTRYPOINT ["onnxruntime-agent"]

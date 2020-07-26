@@ -10,6 +10,12 @@ Run `go test -run ImageClassification`
 | Name                        | Image                               | Label                  | Score       |
 |:---------------------------:|:-----------------------------------:|:----------------------:|:-----------:|
 | Caffe_ResNet_101            | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 18.026      |
+| DPN_68_v1.0                 | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 20.595      |
+| DPN_68_v2.0                 | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 19.059      |
+| DPN_92                      | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 18.087      |
+| DPN_98                      | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 20.959      |
+| DPN_107                     | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 19.373      |
+| DPN_131                     | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 22.959      |
 | Inception_ResNet_v2.0       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  9.391      |
 | Inception_v3.0              | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 14.094      |
 | NasNet_A_Large              | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... |  9.284      |

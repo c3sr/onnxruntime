@@ -105,7 +105,7 @@ func TestPredictorNew(t *testing.T) {
 
 func TestImageClassification(t *testing.T) {
 	onnxruntime.Register()
-	model, err := onnxruntime.FrameworkManifest.FindModel("TorchVision_Alexnet:1.0")
+	model, err := onnxruntime.FrameworkManifest.FindModel("DPN_131:1.0")
 	assert.NoError(t, err)
 	assert.NotEmpty(t, model)
 

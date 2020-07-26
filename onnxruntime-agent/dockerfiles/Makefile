@@ -1,4 +1,3 @@
-
 default: docker_build_cpu
 
 build: docker_build output ## Build Docker image
