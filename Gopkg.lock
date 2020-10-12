@@ -263,7 +263,7 @@
   name = "github.com/c3sr/go-onnxruntime"
   packages = ["."]
   pruneopts = "T"
-  revision = "4c28670ede707e2064339f2b850d6d02efacd299"
+  revision = "87819034cc9f861a62ea7ca7a7987cf9f20420cc"
 
 [[projects]]
   digest = "1:a52f1f23905e7573f790e72445bb52cb393d7529b2ddb1054100937784fea9a0"

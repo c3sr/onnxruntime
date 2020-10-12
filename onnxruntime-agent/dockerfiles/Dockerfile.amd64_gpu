@@ -19,7 +19,7 @@ LABEL org.onnxruntime.agent.build-date=$BUILD_DATE \
 
 
 # Get Go bindings
-ENV PKG github.com/yhchang3/onnxruntime_dev
+ENV PKG github.com/c3sr/onnxruntime
 WORKDIR $GOPATH/src/$PKG
 
 RUN git clone --depth=1 --branch=master https://${PKG}.git .
