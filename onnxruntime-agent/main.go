@@ -7,8 +7,8 @@ import (
 	"github.com/rai-project/config"
 	cmd "github.com/rai-project/dlframework/framework/cmd/server"
 	"github.com/rai-project/logger"
-	"github.com/rai-project/onnxruntime"
-	_ "github.com/rai-project/onnxruntime/predictor"
+	"github.com/c3sr/onnxruntime"
+	_ "github.com/c3sr/onnxruntime/predictor"
 	"github.com/rai-project/tracer"
 	"github.com/sirupsen/logrus"
 )

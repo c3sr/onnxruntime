@@ -14,8 +14,8 @@ import (
 	"github.com/rai-project/dlframework/framework/options"
 	common "github.com/rai-project/dlframework/framework/predictor"
 	"github.com/rai-project/downloadmanager"
-	goonnxruntime "github.com/rai-project/go-onnxruntime"
-	"github.com/rai-project/onnxruntime"
+	goonnxruntime "github.com/c3sr/go-onnxruntime"
+	"github.com/c3sr/onnxruntime"
 	"github.com/rai-project/tracer"
 	gotensor "gorgonia.org/tensor"
 )

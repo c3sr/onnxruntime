@@ -124,6 +124,24 @@
   version = "v0.10.0"
 
 [[projects]]
+  branch = "master"
+  digest = "0:"
+  name = "github.com/apache/arrow"
+  packages = [
+    "go/arrow",
+    "go/arrow/array",
+    "go/arrow/bitutil",
+    "go/arrow/decimal128",
+    "go/arrow/float16",
+    "go/arrow/internal/cpu",
+    "go/arrow/internal/debug",
+    "go/arrow/memory",
+    "go/arrow/tensor",
+  ]
+  pruneopts = "T"
+  revision = "330396a08d16cf82d9a91f67803bc072f26cc6ce"
+
+[[projects]]
   digest = "1:1c3b724e94b03249bd59a2723528ec74fbd1f051dc4b796ce14d9ea859b3707e"
   name = "github.com/apex/log"
   packages = ["."]
@@ -209,6 +227,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "0:"
+  name = "github.com/benesch/cgosymbolizer"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "bec6fe6e597bfeb28b9d8c0b998772635fceea8b"
+
+[[projects]]
+  branch = "master"
   digest = "1:1080d62019d783a0e582b00f7b01216df64a889ecf9fa3751290721e00fc978a"
   name = "github.com/bgentry/go-netrc"
   packages = ["netrc"]
@@ -230,6 +256,14 @@
   packages = ["."]
   pruneopts = "T"
   revision = "0dd3f918b21bec95ace9dc86c7e70266cfc5c702"
+
+[[projects]]
+  branch = "master"
+  digest = "0:"
+  name = "github.com/c3sr/go-onnxruntime"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "4c28670ede707e2064339f2b850d6d02efacd299"
 
 [[projects]]
   digest = "1:a52f1f23905e7573f790e72445bb52cb393d7529b2ddb1054100937784fea9a0"
@@ -879,6 +913,22 @@
   version = "v0.9.2"
 
 [[projects]]
+  digest = "0:"
+  name = "github.com/iancoleman/strcase"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "31e1dd6d285ceb0a110aec6898a75dd6934a35ed"
+  version = "v0.1.2"
+
+[[projects]]
+  branch = "master"
+  digest = "0:"
+  name = "github.com/ianlancetaylor/cgosymbolizer"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "dda951febc364ece8fe314cc507a86e91ea1e9a3"
+
+[[projects]]
   branch = "master"
   digest = "1:4196464afe78839517abc0c402c3b8f18f7409923b590bc3cf38e043ca5ab90d"
   name = "github.com/ianlancetaylor/demangle"
@@ -1405,6 +1455,17 @@
 
 [[projects]]
   branch = "master"
+  digest = "0:"
+  name = "github.com/rai-project/go-cupti"
+  packages = [
+    ".",
+    "types",
+  ]
+  pruneopts = "T"
+  revision = "042c8db6b58eea64b98a52e9dc4cc069196abc84"
+
+[[projects]]
+  branch = "master"
   digest = "1:2684c1c14de10127bc56fa8ee71ac498a8c65fed77a9b25ef7a2a6ae4ec2a0af"
   name = "github.com/rai-project/go-echarts"
   packages = ["charts"]
@@ -1663,6 +1724,14 @@
   packages = ["logger"]
   pruneopts = "T"
   revision = "97ba6d7fd665f3b5e44934897e444a1b3c0150a4"
+
+[[projects]]
+  branch = "master"
+  digest = "0:"
+  name = "github.com/rainycape/dl"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "1b01514224a1a60a6bcbb0b6b9d3a00ec14ae17f"
 
 [[projects]]
   digest = "1:40e527269f1feb16b3069bfe80ff05a462d190eacfe07eb0a59fa25c381db7af"
@@ -2567,7 +2636,7 @@
   revision = "eeeca48fe7764f320e4870d231902bf9c1be2c08"
 
 [[projects]]
-  digest = "1:7264b608c282e3de715f6da7d1199e09dd0680cbec6f94598e7ed0a3ec5143eb"
+  digest = "0:"
   name = "gorgonia.org/tensor"
   packages = [
     ".",
@@ -2577,8 +2646,8 @@
     "internal/storage",
   ]
   pruneopts = "T"
-  revision = "6848ca2e9a6c44d93bec0814b30ded143c75ca94"
-  version = "v0.95"
+  revision = "0c8a1b67712c49909ea13fdd792649f92de5ba58"
+  version = "v0.9.11"
 
 [[projects]]
   digest = "1:62ea55b8b5391b241fac666e094216cb091755363cab645435de15f4e3609c20"
@@ -2620,6 +2689,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/c3sr/go-onnxruntime",
     "github.com/elazarl/go-bindata-assetfs",
     "github.com/k0kubun/pp",
     "github.com/opentracing/opentracing-go",

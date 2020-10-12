@@ -15,7 +15,7 @@ import (
 	raiimage "github.com/rai-project/image"
 	"github.com/rai-project/image/types"
 	nvidiasmi "github.com/rai-project/nvidia-smi"
-	"github.com/rai-project/onnxruntime"
+	"github.com/c3sr/onnxruntime"
 	"github.com/stretchr/testify/assert"
 	gotensor "gorgonia.org/tensor"
 )

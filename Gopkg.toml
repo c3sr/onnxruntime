@@ -24,8 +24,6 @@
 #   go-tests = true
 #   unused-packages = true
 
-ignored = ["github.com/rai-project/go-onnxruntime"]
-
 [[constraint]]
   name = "github.com/elazarl/go-bindata-assetfs"
   version = "1.0.0"
