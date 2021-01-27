@@ -10,7 +10,7 @@ import (
 
 var FrameworkManifest = dlframework.FrameworkManifest{
 	Name:    "Onnxruntime",
-	Version: "1.3.1",
+	Version: "1.6.0",
 	Container: map[string]*dlframework.ContainerHardware{
 		"amd64": {
 			Cpu: "raiproject/carml-onnxruntime:amd64-cpu",

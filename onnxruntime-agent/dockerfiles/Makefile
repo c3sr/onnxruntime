@@ -7,7 +7,7 @@ push: docker_push output ## Push Docker image
 release: docker_build docker_push
 
 # Image and binary can be overidden with env vars.
-DOCKER_IMAGE ?= carml/onnxruntime-agent
+DOCKER_IMAGE ?= c3sr/onnxruntime-agent
 
 
 # Get System architecture
@@ -51,7 +51,7 @@ BUILD_ARGS = --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 		        --build-arg VCS_URL=`git config --get remote.origin.url` \
 		        --build-arg VCS_REF=$(GIT_COMMIT) \
 		        --build-arg ARCH=$(ARCH) \
-				--build-arg FRAMEWORK_VERSION="1.3.1"
+				--build-arg FRAMEWORK_VERSION="1.6.0"
 
 docker_build_gpu: # Build GPU Docker image
 	@docker build $(BUILD_ARGS) \
