@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/rai-project/config"
-	_ "github.com/rai-project/tracer/jaeger"
+	"github.com/c3sr/config"
+	_ "github.com/c3sr/tracer/jaeger"
 )
 
 func TestMain(m *testing.M) {

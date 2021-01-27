@@ -4,8 +4,8 @@ import (
 	"os"
 
 	assetfs "github.com/elazarl/go-bindata-assetfs"
-	"github.com/rai-project/dlframework"
-	"github.com/rai-project/dlframework/framework"
+	"github.com/c3sr/dlframework"
+	"github.com/c3sr/dlframework/framework"
 )
 
 var FrameworkManifest = dlframework.FrameworkManifest{
