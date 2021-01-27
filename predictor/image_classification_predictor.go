@@ -6,7 +6,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/k0kubun/pp"
 	opentracing "github.com/opentracing/opentracing-go"
 	olog "github.com/opentracing/opentracing-go/log"
 	"github.com/pkg/errors"
@@ -230,8 +229,6 @@ func (p *ImageClassificationPredictor) Predict(ctx context.Context, data interfa
 
 	fst := gotensors[0]
 	dims := append([]int{len(gotensors)}, fst.Shape()...)
-	// debug
-	pp.Println(dims)
 	// TODO: support data types other than float32
 	var input []float32
 	for _, t := range gotensors {

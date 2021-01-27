@@ -6,7 +6,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/k0kubun/pp"
 	opentracing "github.com/opentracing/opentracing-go"
 	olog "github.com/opentracing/opentracing-go/log"
 	"github.com/pkg/errors"
@@ -230,8 +229,6 @@ func (p *InstanceSegmentationPredictor) Predict(ctx context.Context, data interf
 	fst := gotensors[0]
 	// TODO: right now the only model for instance segmentation accepts CHW without batch
 	dims := fst.Shape()
-	// debug
-	pp.Println(dims)
 	// TODO support data types other than float32
 	var input []float32
 	for _, t := range gotensors {
