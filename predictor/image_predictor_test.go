@@ -105,7 +105,7 @@ func TestPredictorNew(t *testing.T) {
 
 func TestImageClassification(t *testing.T) {
 	onnxruntime.Register()
-	model, err := onnxruntime.FrameworkManifest.FindModel("DPN_131:1.0")
+	model, err := onnxruntime.FrameworkManifest.FindModel("Xception:1.0")
 	assert.NoError(t, err)
 	assert.NotEmpty(t, model)
 
@@ -185,7 +185,7 @@ func TestImageClassification(t *testing.T) {
 	pp.Println("Probability: ", pred[0][0].GetProbability())
 
 	// The score not applied softmax for torchvision alexnet
-	// assert.InDelta(t, float32(15.774), pred[0][0].GetProbability(), 0.001)
+	// assert.InDelta(t, float32(0.702554), pred[0][0].GetProbability(), 0.001)
 	// assert.Equal(t, int32(103), pred[0][0].GetClassification().GetIndex())
 }
 
