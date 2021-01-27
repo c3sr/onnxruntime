@@ -6,9 +6,6 @@ import (
 	"os"
 	"strings"
 
-	opentracing "github.com/opentracing/opentracing-go"
-	olog "github.com/opentracing/opentracing-go/log"
-	"github.com/pkg/errors"
 	"github.com/c3sr/config"
 	"github.com/c3sr/dlframework"
 	"github.com/c3sr/dlframework/framework/agent"
@@ -18,6 +15,9 @@ import (
 	goonnxruntime "github.com/c3sr/go-onnxruntime"
 	"github.com/c3sr/onnxruntime"
 	"github.com/c3sr/tracer"
+	opentracing "github.com/opentracing/opentracing-go"
+	olog "github.com/opentracing/opentracing-go/log"
+	"github.com/pkg/errors"
 	gotensor "gorgonia.org/tensor"
 )
 

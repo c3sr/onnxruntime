@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	
+
 	"github.com/c3sr/config"
 	cmd "github.com/c3sr/dlframework/framework/cmd/server"
 	"github.com/c3sr/logger"
@@ -14,11 +14,11 @@ import (
 )
 
 var (
-	modelName string
+	modelName    string
 	modelVersion string
-	hostName, _ = os.Hostname()
-	framework = onnxruntime.FrameworkManifest
-	log *logrus.Entry
+	hostName, _  = os.Hostname()
+	framework    = onnxruntime.FrameworkManifest
+	log          *logrus.Entry
 )
 
 func main() {

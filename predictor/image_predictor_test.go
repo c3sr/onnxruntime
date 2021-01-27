@@ -9,13 +9,13 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/k0kubun/pp"
 	"github.com/c3sr/dlframework"
 	"github.com/c3sr/dlframework/framework/options"
 	raiimage "github.com/c3sr/image"
 	"github.com/c3sr/image/types"
 	nvidiasmi "github.com/c3sr/nvidia-smi"
 	"github.com/c3sr/onnxruntime"
+	"github.com/k0kubun/pp"
 	"github.com/stretchr/testify/assert"
 	gotensor "gorgonia.org/tensor"
 )

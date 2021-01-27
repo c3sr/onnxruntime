@@ -397,11 +397,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:bace3efd8ca8b0a0586958d4b859efaf314b6dc9a2bb57c8974c2c5b4b17069c"
+  digest = "1:28412964a6841946e1290fd9a75bdc236dbebfe3b209574484fd515a181b0118"
   name = "github.com/c3sr/go-onnxruntime"
   packages = ["."]
   pruneopts = "T"
-  revision = "4d171f3d2c611afa08a7abaa805bce46dc3578bb"
+  revision = "60c189859967eb290bfec8b9885052be264adb72"
 
 [[projects]]
   branch = "master"

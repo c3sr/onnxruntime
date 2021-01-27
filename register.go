@@ -3,9 +3,9 @@ package onnxruntime
 import (
 	"os"
 
-	assetfs "github.com/elazarl/go-bindata-assetfs"
 	"github.com/c3sr/dlframework"
 	"github.com/c3sr/dlframework/framework"
+	assetfs "github.com/elazarl/go-bindata-assetfs"
 )
 
 var FrameworkManifest = dlframework.FrameworkManifest{
