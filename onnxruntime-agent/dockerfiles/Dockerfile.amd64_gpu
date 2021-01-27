@@ -26,9 +26,9 @@ RUN git clone --depth=1 --branch=master https://${PKG}.git .
 
 RUN dep ensure -v -vendor-only
 
-RUN go build -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
+RUN go install -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
     cd onnxruntime-agent && \
-    go build && \
+    go install && \
     cd ..
 
 ENTRYPOINT ["onnxruntime-agent"]

@@ -26,9 +26,9 @@ RUN git clone --depth=1 --branch=master https://${PKG}.git .
 
 RUN dep ensure -v -vendor-only
 
-RUN go build -tags=nogpu -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
+RUN go install -tags=nogpu -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
     cd onnxruntime-agent && \
-    go build -tags=nogpu && \
+    go install -tags=nogpu && \
     cd ..
 
 ENTRYPOINT ["onnxruntime-agent"]
