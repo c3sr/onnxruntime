@@ -1,4 +1,4 @@
-FROM carml/go-onnxruntime:amd64-gpu-latest
+FROM c3sr/go-onnxruntime:amd64-gpu-latest
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
