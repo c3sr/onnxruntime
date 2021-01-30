@@ -30,16 +30,16 @@
   name = "github.com/c3sr/config"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/c3sr/dlframework"
+  version = "0.3.0"
 
 [[constraint]]
   branch = "master"
   name = "github.com/c3sr/downloadmanager"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/c3sr/go-onnxruntime"
+  version = "0.0.1"
 
 [[constraint]]
   branch = "master"
