@@ -306,7 +306,7 @@
   revision = "8ec223752bfc2f65b7e37373a0ac0530ffb81509"
 
 [[projects]]
-  digest = "1:d89691290a00089547825225680adb2b8b63cfa9296d317ffa88963d5e75d968"
+  digest = "1:0902b5c40c5cfe2295467d93d743131423d210dc6f9bcca0e5c027bdcbf48092"
   name = "github.com/c3sr/dlframework"
   packages = [
     ".",
@@ -320,8 +320,8 @@
     "steps",
   ]
   pruneopts = "T"
-  revision = "57e6c933fdf27ede7471991c01a8fa13c2719775"
-  version = "v0.3.0"
+  revision = "bd47808bf7fcc9985f0b3f1fcecd8d267553357c"
+  version = "v0.3.1"
 
 [[projects]]
   branch = "master"
@@ -396,12 +396,12 @@
   revision = "5f41fcc47fa01bd4eebeb21da28a4a7829a55e48"
 
 [[projects]]
-  digest = "1:5ed411e34e016b3a60d8bd34f3cedad6deeae0fe314d4385f4ef954aa6a0c4cf"
+  digest = "1:33aeed20b49f8d7e3dac0389b762cd12a09c418168008a38c3186b6103454ae6"
   name = "github.com/c3sr/go-onnxruntime"
   packages = ["."]
   pruneopts = "T"
-  revision = "c9212cbabba7e0140c3454a2ec137984ac7c7f24"
-  version = "v0.0.1"
+  revision = "c21f3828061d2e3379a41fae7748f98480b85bc0"
+  version = "v0.0.2"
 
 [[projects]]
   branch = "master"
