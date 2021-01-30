@@ -31,7 +31,7 @@
 
 [[constraint]]
   name = "github.com/c3sr/dlframework"
-  version = "0.3.0"
+  version = "0.3.1"
 
 [[constraint]]
   branch = "master"
@@ -39,7 +39,7 @@
 
 [[constraint]]
   name = "github.com/c3sr/go-onnxruntime"
-  version = "0.0.1"
+  version = "0.0.2"
 
 [[constraint]]
   branch = "master"
