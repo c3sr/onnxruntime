@@ -2,6 +2,7 @@ package predictor
 
 import (
 	"context"
+	"fmt"
 	"image"
 	"image/color"
 	"image/jpeg"
@@ -191,7 +192,7 @@ func TestImageClassification(t *testing.T) {
 
 func TestObjectDetection(t *testing.T) {
 	onnxruntime.Register()
-	model, err := onnxruntime.FrameworkManifest.FindModel("MobileNet_SSD_Lite_v2.0:1.0")
+	model, err := onnxruntime.FrameworkManifest.FindModel("OnnxVision_SSD:1.0")
 	assert.NoError(t, err)
 	assert.NotEmpty(t, model)
 
@@ -266,16 +267,16 @@ func TestObjectDetection(t *testing.T) {
 		return
 	}
 
-	for i, cnt := 0, 0; i < len(pred[0]) && cnt < 5; i++ {
-		// skip background
-		if pred[0][i].GetBoundingBox().GetIndex() != 0 {
+	for ii, cnt := 0, 0; ii < len(pred[0]) && cnt < 3; ii++ {
+		if pred[0][ii].GetProbability() >= 0.5 {
 			cnt++
-			pp.Println("Label: ", pred[0][i].GetBoundingBox().GetLabel())
-			pp.Println("Probability: ", pred[0][i].GetProbability())
-			pp.Println("Xmax: ", pred[0][i].GetBoundingBox().GetXmax())
-			pp.Println("Xmin: ", pred[0][i].GetBoundingBox().GetXmin())
-			pp.Println("Ymax: ", pred[0][i].GetBoundingBox().GetYmax())
-			pp.Println("Ymin: ", pred[0][i].GetBoundingBox().GetYmin())
+			fmt.Printf("|                             | ./_fixtures/lane_control.jpg           | %s   | %.3f | %.3f | %.3f | %.3f | %.3f       |\n",
+				pred[0][ii].GetBoundingBox().GetLabel(),
+				pred[0][ii].GetBoundingBox().GetXmin(),
+				pred[0][ii].GetBoundingBox().GetXmax(),
+				pred[0][ii].GetBoundingBox().GetYmin(),
+				pred[0][ii].GetBoundingBox().GetYmax(),
+				pred[0][ii].GetProbability())
 		}
 	}
 }

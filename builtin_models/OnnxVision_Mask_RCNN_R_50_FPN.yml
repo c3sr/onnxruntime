@@ -34,9 +34,9 @@ inputs:
           scale: 1
 output:
     # the type of the output
-    type: boundingbox
+    type: instancesegment
     # a description of the output parameter
-    description: the output bounding box # a description of the output parameter
+    description: the output instance segment # a description of the output parameter
     parameters:
         classes_layer: 1
         boxes_layer: 0
@@ -55,3 +55,4 @@ attributes: # extra network attributes
     kind: CNN # the kind of neural network (CNN, RNN, ...)
     training_dataset: COCO 2017 # dataset used to for training
     manifest_author: Yen-Hsiang Chang
+hide: true # Need some post processing methods
