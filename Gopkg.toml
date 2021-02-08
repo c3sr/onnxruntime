@@ -31,7 +31,7 @@
 
 [[constraint]]
   name = "github.com/c3sr/dlframework"
-  version = "0.3.2"
+  version = "0.3.5"
 
 [[constraint]]
   branch = "master"
