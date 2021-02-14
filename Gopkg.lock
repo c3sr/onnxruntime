@@ -233,20 +233,20 @@
   revision = "0dd3f918b21bec95ace9dc86c7e70266cfc5c702"
 
 [[projects]]
-  branch = "master"
-  digest = "1:a52359c45a6b4823910a2b80370911dc7d1ed7d3c27f2cf947bc95c0afb31be7"
+  digest = "1:de7bd32dc2ed098e2a813f0129c90ef575f55d4d84c2c7e6bce18bd09c3226ed"
   name = "github.com/c3sr/acl"
   packages = ["."]
   pruneopts = "T"
-  revision = "24c7a7d7e1d7f6ab4a5982d2b63b4eb3b0f784da"
+  revision = "833504a31a37a9ac82ec10c7978b36817d122bdb"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:adeb24f64958fed7eeaf298c742bdd5d7540a42ae02e8908324e677e098a0d69"
+  digest = "1:18effc1dab6ff955d21c909dfebfadfcb39a12549f0d97b20b713645ac67012d"
   name = "github.com/c3sr/archive"
   packages = ["."]
   pruneopts = "T"
-  revision = "3a150a53bfa5fb9b370236cd52a526a3c12e0901"
+  revision = "287201abeaa4e3ad505a3a40fb481f8168ff589e"
+  version = "v0.1.0"
 
 [[projects]]
   branch = "master"
@@ -257,39 +257,39 @@
   revision = "94203d1688cb9005b8d6584a6de0a3b609342a8b"
 
 [[projects]]
-  branch = "master"
-  digest = "1:60399a454de5528b0b6234aa2425b643669acd636a161a2047eb7fdacb948197"
+  digest = "1:4eb4f72ede7cf8a4a39b343e1c071141256f00bc0c0829bc9c5aab4287a9196d"
   name = "github.com/c3sr/cmd"
   packages = ["."]
   pruneopts = "T"
-  revision = "e84a4d6868cd1defc720d0ec167e5233e7cc5b83"
+  revision = "ad66f0b2183c0ec18de6449f2ccaad3664e989d8"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:56755c837ad2f59378427936cc5817f8036f3aa787113f70ac1034a6044bc9e4"
+  digest = "1:774cac9a0f488fdcef05f46f6ac808e0091d5e13b32e18ed09a33f820966c13e"
   name = "github.com/c3sr/config"
   packages = ["."]
   pruneopts = "T"
-  revision = "e9d07ff805c35518081968c3cdb61e2a452cacff"
+  revision = "35ed8e2450bf72580413486a801a469faeb04189"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:b8ef10836075e638ed6600cbb00969596845cbe73206fc7f1e2cd01851a8d049"
+  digest = "1:0714b8aa492f1836d4084e6f4fe59672caef2fcf604d2d6539023fe35617e4da"
   name = "github.com/c3sr/cpu"
   packages = ["cpuid"]
   pruneopts = "T"
-  revision = "47f0c73e5808d72263a55355b19812dac907571f"
+  revision = "d7c85a1d3ded6cdac166c230b6b84d01520f78fa"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:c8694f073c98440fd13084e1ec6994d721be59f9e89865c0fb08a1dce938a6fa"
+  digest = "1:855d90b2d714d5ca9647d0102c531366eab99b1779d595e1226c0b447783ac38"
   name = "github.com/c3sr/database"
   packages = [
     ".",
     "mongodb",
   ]
   pruneopts = "T"
-  revision = "95d7d971e03a01f48dc54e5f17319ec90068b87c"
+  revision = "9e90b369d54db99bc3e6915da90864b88ef6455f"
+  version = "v0.1.0"
 
 [[projects]]
   branch = "master"
@@ -306,7 +306,7 @@
   revision = "8ec223752bfc2f65b7e37373a0ac0530ffb81509"
 
 [[projects]]
-  digest = "1:61156ecf8cc73fc6c906376359bcd1c0d7c269b80a51f9e8231de0899351fd73"
+  digest = "1:97263c69f0bcae47e0ab7c56305f50e3e0017db3a32ed6f3c3fa7ce2d2b0de68"
   name = "github.com/c3sr/dlframework"
   packages = [
     ".",
@@ -320,8 +320,8 @@
     "steps",
   ]
   pruneopts = "T"
-  revision = "d4e4ad8859a97b7fecb9e078a7e97073c66e2dc8"
-  version = "v0.3.6"
+  revision = "d8df5b11974a9cdb8d45630e8d6ef40b622bd83a"
+  version = "v0.3.7"
 
 [[projects]]
   branch = "master"
@@ -337,23 +337,23 @@
   revision = "fecbd72108d7fc0068c0d227411cfe40e3b4b6a7"
 
 [[projects]]
-  branch = "master"
-  digest = "1:604ffabc605e0970452f1769c3843d61d8d7174511cdee11301b9bf1b9b7354f"
+  digest = "1:207ae282ce612a8ba4e14994fcddfbb5d25cf12ef1b6e4e394eddfd55692c560"
   name = "github.com/c3sr/docker"
   packages = [
     ".",
     "cuda",
   ]
   pruneopts = "T"
-  revision = "93a3f26b84ff043a58c9512096868dbf308237aa"
+  revision = "7f649a341f43546c62b3fe42d515cd03b2006302"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:9c15aebb70d20cda5781d7870c554e1e98ae28edcaece48a5b2ab325d889d94b"
+  digest = "1:9e21cd54baed6b6f46a4c12869c7ee5d52b62f1575088a9afcb1c24d52a14443"
   name = "github.com/c3sr/downloadmanager"
   packages = ["."]
   pruneopts = "T"
-  revision = "1a262b409427253662c59ca337eea469017813a4"
+  revision = "acba98414d990a9a097dcebb8cc1b69f8565ffb2"
+  version = "v0.1.0"
 
 [[projects]]
   branch = "master"
@@ -369,31 +369,34 @@
   revision = "8275053a89b5963ab624e58b071390d200767de6"
 
 [[projects]]
-  branch = "master"
-  digest = "1:9d708c91d130805e367ab962cdcf0ba05199e2bcdd9812d46181f046c9c057f4"
+  digest = "1:b39d2bfcf515185aa9c99a9deaf28a67ea0c7622a63d7f142c785a130dccb172"
   name = "github.com/c3sr/go-cupti"
   packages = [
     ".",
     "types",
   ]
   pruneopts = "T"
-  revision = "404c4c59d83587982ea954e4c84234dad88ad07b"
+  revision = "de0372757b491f184dc7def4b7f2a136acffa025"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:2684c1c14de10127bc56fa8ee71ac498a8c65fed77a9b25ef7a2a6ae4ec2a0af"
+  digest = "1:cd1c549a655411bb2fdb2928afe7ebd43c1f6bdcac9439a9d0a5fa77df8fd235"
   name = "github.com/c3sr/go-echarts"
   packages = ["charts"]
   pruneopts = "T"
-  revision = "cf02e63b120787a97f934850e57d547206c9a64d"
+  revision = "cead9f156ce12fba2141798c673575074269367f"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:e7aaabe0081862a9364ab573927bbc8f0527f25325a9599ff306bc0ee810c5f3"
+  digest = "1:081c0560f0a28d485d3ca8045d010a73130cd5d171dd535c9894ae61b6b9ceb6"
   name = "github.com/c3sr/go-libjpeg"
-  packages = ["."]
+  packages = [
+    ".",
+    "rgb",
+  ]
   pruneopts = "T"
-  revision = "5f41fcc47fa01bd4eebeb21da28a4a7829a55e48"
+  revision = "dc75e6267f09116917ff331ba4ed8fe10e540fae"
+  version = "v0.1.0"
 
 [[projects]]
   digest = "1:443d7c402dcbb96db787725d28dee6348a9c2cabb46f72788829b74b57cea1d5"
@@ -404,16 +407,15 @@
   version = "v0.0.3"
 
 [[projects]]
-  branch = "master"
-  digest = "1:417701f9e022717790bd59ee8074fbed10f2ead5f09f16a756b5caebed583078"
+  digest = "1:beabba64683ecd3d9e40d940300706c769387dffc89de062bded73e435ffb841"
   name = "github.com/c3sr/grpc"
   packages = ["."]
   pruneopts = "T"
-  revision = "3ad128d7dd2b0207c18d0717b4268da39f0e34bd"
+  revision = "e01d4f343bf3262494989133b49f3d8e73c9abf8"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:337b89dd7710ba0f4206bf07ce0b7416e47b70fa592fa055c0fff10f844c21e2"
+  digest = "1:49475d662c21062ff0142ba1019c2ec2d49c7c1ad087d83b61f7960ec5f8df3a"
   name = "github.com/c3sr/image"
   packages = [
     ".",
@@ -421,11 +423,11 @@
     "types",
   ]
   pruneopts = "T"
-  revision = "2cfb4f0f4e6a5a595627443fee1cb40455dad7ab"
+  revision = "cd2dd6a9395abc49d8e7fa68056534c974e9d6b2"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:041537d0e2097ef33fbcda837a30a20c46617d9bffdc52d7ced888d355c21329"
+  digest = "1:8959d6104b02640b16422651784ef238b5756a1622a883ae89076fc3bd3be615"
   name = "github.com/c3sr/joefriday"
   packages = [
     ".",
@@ -438,19 +440,19 @@
     "system/version",
   ]
   pruneopts = "T"
-  revision = "c9170896cb79cb3d41144440a784d1fe4d74788c"
+  revision = "d7daee2c0ae1742eeb8323deb0200aa0e93c2a2d"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:ed1e4ccd20796d12c068007e5ef3d66647da9b02db26a33432d69e1139756b8e"
+  digest = "1:ad1ba820b1f9f87708f0b792749fdb48cd92d3c4e8cf692f603b9635a48c3409"
   name = "github.com/c3sr/ldcache"
   packages = ["."]
   pruneopts = "T"
-  revision = "8456d14bfc12275acc4957e582269c9c01236b79"
+  revision = "8f627ab4c87e9e747fb4b0cdd761acca8ca33195"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:2328c9f4359fbdc73583b010b513e156e698f2a8f577b2066588b992a8ee9706"
+  digest = "1:464de95ea28e37c00eb2b72e2f948bd7b92a42f45fd2854316d10500c9700011"
   name = "github.com/c3sr/libkv"
   packages = [
     ".",
@@ -459,22 +461,22 @@
     "store/mock",
   ]
   pruneopts = "T"
-  revision = "e1d73a0bfd37479cd54307ed653dc251d7769b79"
+  revision = "c4babe84b7d1631c16262cec87705aec2398092b"
+  version = "v0.3.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:a8de2412ce1db1fea3816721ca9588d958f74541008887e697a6579a580f1d27"
+  digest = "1:ea30d063b67f397be1f4a6e0f8d0dbc5da588d8489f9621d97a7398934bbb80c"
   name = "github.com/c3sr/lock"
   packages = [
     ".",
     "registry",
   ]
   pruneopts = "T"
-  revision = "018daba6590bc23852a4472d676d16c0f59f0ee2"
+  revision = "4002142a6a52b64cbc136d780ab0f63761906817"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:d7cc3e530f4d861d300fedf80123c0ed537b145bb876a513498a235bc1020d28"
+  digest = "1:453f416161e6ae53e8f4712096452b91a7afc3b98cff1568e3652d7821fa3b39"
   name = "github.com/c3sr/logger"
   packages = [
     ".",
@@ -482,11 +484,11 @@
     "hooks/logruzio",
   ]
   pruneopts = "T"
-  revision = "3a1b4f2fe0a8cff889e1ee8fbda6967bd9c0d550"
+  revision = "159591d2749003f68b0dacfadf03ab90a18f66c1"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:72ca2a93bef979bdfb50bdb46963847b4d7c7597fc12894f5c7d8e61f95a1fea"
+  digest = "1:d37fd59b50dbe74e1898f70fb407e8cbabfd9ce0b7f907083c42eaec41556eba"
   name = "github.com/c3sr/machine"
   packages = [
     ".",
@@ -494,67 +496,67 @@
     "os",
   ]
   pruneopts = "T"
-  revision = "6628880864ba48724ca5f7b63fe9995d4c5f3689"
+  revision = "96aea5331fe77b9d53c90a5b58b3a12ceb46cea7"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:1b47dffe8e4024d616a515a53b277a3e13b6c74acd741517ab5a6cf8ecfa61ce"
+  digest = "1:85e27c5adecf76b7b23f185836648a966da9584d2933b6eed38e5b52f24110c8"
   name = "github.com/c3sr/model"
   packages = ["."]
   pruneopts = "T"
-  revision = "9dfbb7497d0b2a4401bb730836ca6820aee03a45"
+  revision = "d35a3ae3b4d1abee6d9ea2dab08f41954fa6cc67"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:2d566f91ba04cebb801ae9e09348ccc3f5355718f20816e6f6503186c09934d0"
+  digest = "1:f669541dd54b3402e8c6c7f05a03b351751e30a32018e337806a1568eb7c81f8"
   name = "github.com/c3sr/monitoring"
   packages = ["monitors"]
   pruneopts = "T"
-  revision = "17bdba6c956206c8124bc3536b47b7ff89baf2ae"
+  revision = "5662ccfdb8f12637a4611709322e5cd3d8151496"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:0e63b1e3df757f45bfaa17e326b7e159ca1372c9ec9f7b88c2a419412a513d2f"
+  digest = "1:45ef8aa7f4ffe6e2b34ef153dec41747eb2d105fbda693cc02853c1865dbea1c"
   name = "github.com/c3sr/nvidia-smi"
   packages = ["."]
   pruneopts = "T"
-  revision = "3a66214ea3aa0157acb2be6e47d4c548e9ac7b65"
+  revision = "00b505f3250dec433a7bae0a401d40e40be5c657"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:6c8f7f7333bc8f2ddcb25508dea709fb817491f6cb4b8d10a2844e31652cce00"
+  digest = "1:cac592354abf9d569dd7ce41f561a74d871a8a7d6069b7eb3dab6c524480e9d8"
   name = "github.com/c3sr/nvml-go"
   packages = ["."]
   pruneopts = "T"
-  revision = "c893af65d8c554dae557672dc257f3849a1435db"
+  revision = "1727b8458e25f8a7d41981dca1760fb2ddc8618a"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:f2d9d200edce3ce09e3dbf89ea7728875fabca2ae24db5e2df183d0c381fa1d1"
+  digest = "1:b08953eb8ffaea1fcb8d9dc7c973db46b6bc5640677c2ffa2e357bf5c9800ec7"
   name = "github.com/c3sr/parallel"
   packages = ["tunny"]
   pruneopts = "T"
-  revision = "1ad96d0bde269b0ed391b5e6872a1c5c00b3fbc0"
+  revision = "f8e7821f91359e194d98535dbdc7f23aa18d77dd"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:1f677e631c6f86ddea12ff60963edf488c700f108042cdb6a61871622f6bde72"
+  digest = "1:b0b3436cfe60efde32d6b187ec7c9c4c3e401590d6b264eb640df287441114dd"
   name = "github.com/c3sr/pipeline"
   packages = ["."]
   pruneopts = "T"
-  revision = "8fd69e91cfc64ad360bdce798a661170ede09f1b"
+  revision = "c0cd619e93515223980abce6d6e26fc89f296260"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:960862a51de332377b47bf9ab87c0e4611011ab695207af0d2e5eba1c8023167"
+  digest = "1:147c1b2799bc807f30534121b7c2e396aee020071a8a0c4fd2dd37ff49e43138"
   name = "github.com/c3sr/registry"
   packages = ["."]
   pruneopts = "T"
-  revision = "bd8759510b62379eb1d4693db2c9d9a98fe2b8d3"
+  revision = "d4a03737b51b2c0f3af086cfe23a5d1bc4799108"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:caa47db5f8bfd8aa7a14da4b35d52d6b3258662a83e79a3f99801189032da75a"
+  digest = "1:c0f91c11b63d93e3d70340e8620538f0083388d2302a234636f898c65a49d958"
   name = "github.com/c3sr/serializer"
   packages = [
     ".",
@@ -563,30 +565,30 @@
     "jsonpb",
   ]
   pruneopts = "T"
-  revision = "cdbfac2bf33ce9a86b7d33e2a10fad9c04892054"
+  revision = "90e6ae01ee1bfad0efb0ab324347568b7895480a"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:7538db08290e7dbb1bf6723694c0742de4c561a80cff4f3c69d3dc395cba5c03"
+  digest = "1:550ff18afb1b2171413767dafd76734db8b29e1fb7ea1d38d621ce6af216707a"
   name = "github.com/c3sr/sys"
   packages = [
     ".",
     "cgroup",
   ]
   pruneopts = "T"
-  revision = "1261d2fb79dcd563bafafbf1a3b1a6cad1daff35"
+  revision = "7cab585cb12cdc1f4230925c7ea9c103091b80a2"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:5ce27a3e69be2f5e451dbb792cab68eccc01a25190695d74003c3cca08b1be88"
+  digest = "1:ed337ad9f0d9a912e50c6791a593e9d68c105b984be1614bcbf8bd17255a706b"
   name = "github.com/c3sr/tegra"
   packages = ["."]
   pruneopts = "T"
-  revision = "e3625f658736e0adf15862b5ee7ed6f405a69411"
+  revision = "7c9c6c300dc463e50d35c93c28d2f684cdbd73a2"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:a7edec7688ae8ce15fdd1f921229ff994eba5ffa81f7fb6c5f4f6e3b0b9e1916"
+  digest = "1:727edacac8c181a27f409a3a73d166b2ffaae6b64e85555d9da90c27c7f4ba61"
   name = "github.com/c3sr/tracer"
   packages = [
     ".",
@@ -602,11 +604,11 @@
     "utils",
   ]
   pruneopts = "T"
-  revision = "43da420e1ef6bf956c8dfd78d3cce306c1cfa781"
+  revision = "5aa2b32716b83fd736644a94b13fea619d073ba8"
+  version = "v0.3.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:8aec45741fbd2baa1c2feee1afdd6a4c69562329929932545f4c028cf8751caa"
+  digest = "1:c6a42b6dd2b8c41853dcd3174ec3b875940c5753e6b4a018e00935bc7de06796"
   name = "github.com/c3sr/utils"
   packages = [
     ".",
@@ -614,31 +616,32 @@
     "promise",
   ]
   pruneopts = "T"
-  revision = "1131f94737fa162c7abd799d49e0e61d28827bd7"
+  revision = "8c94d0bf9baa1095effd041da69653e1103b68c7"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:c7c5356462640cb1ce5337a7f48991bcdfa7f768af0037f40f7dc3b5433e56fe"
+  digest = "1:bec8d02ce7d7bd43c3ff435b71c6f75ab3e6ac35b69b50f457f8b3acfab11d17"
   name = "github.com/c3sr/uuid"
   packages = ["."]
   pruneopts = "T"
-  revision = "16bb3b3c5514e4f48dc6740cd05a6e0b55a56353"
+  revision = "97e22344270854c12f76eb69850d917025368add"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:da993593fb42403a3695f952e3666346fc3b510862c3a1086006c7566fa004b9"
+  digest = "1:77555ff63552bbfc1b00aa018fb013e76256d70764ded9cd5a1dad891a740681"
   name = "github.com/c3sr/vipertags"
   packages = ["."]
   pruneopts = "T"
-  revision = "c54404b591155101716768833b5eee64aca9a3cd"
+  revision = "b8a9fd68c520fe07ffbf7f642b7e73eac2a0434f"
+  version = "v0.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:6749577ecd197081b73f939f12cc2d6565c146b841ea331e291a9243e27109af"
+  digest = "1:d6edd0c2c54aa8ab619ac584d041ea64935b6b244dd658617707e52ba6c464c8"
   name = "github.com/c3sr/web"
   packages = ["logger"]
   pruneopts = "T"
-  revision = "6cf59508aab05d144041ca30db154fd8cff8982c"
+  revision = "1d271cef2644aa95e46e4368bbe13685cb1b3fc6"
+  version = "v0.1.0"
 
 [[projects]]
   branch = "master"
