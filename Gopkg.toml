@@ -24,38 +24,149 @@
 #   go-tests = true
 #   unused-packages = true
 
+[[override]]
+  name = "github.com/c3sr/acl"
+  version = "0.1.0"
 
-[[constraint]]
-  branch = "master"
+[[override]]
+  name = "github.com/c3sr/archive"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/cmd"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/cpu"
+  version = "0.1.0"
+
+[[override]]
   name = "github.com/c3sr/config"
+  version = "0.1.0"
 
-[[constraint]]
+[[override]]
   name = "github.com/c3sr/dlframework"
-  version = "0.3.6"
+  version = "0.3.7"
 
-[[constraint]]
-  branch = "master"
+[[override]]
+  name = "github.com/c3sr/database"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/docker"
+  version = "0.1.0"
+
+[[override]]
   name = "github.com/c3sr/downloadmanager"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/go-cupti"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/go-echarts"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/go-libjpeg"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/grpc"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/image"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/joefriday"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/ldcache"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/libkv"
+  version = "0.3.0"
+
+[[override]]
+  name = "github.com/c3sr/lock"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/logger"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/machine"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/model"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/monitoring"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/nvidia-smi"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/nvml-go"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/parallel"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/pipeline"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/registry"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/serializer"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/sys"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/trgra"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/tracer"
+  version = "0.3.0"
+
+[[override]]
+  name = "github.com/c3sr/uuid"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/utils"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/web"
+  version = "0.1.0"
+
+[[override]]
+  name = "github.com/c3sr/vipertags"
+  version = "0.1.0"
 
 [[constraint]]
   name = "github.com/c3sr/go-onnxruntime"
   version = "0.0.3"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/c3sr/image"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/c3sr/logger"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/c3sr/nvidia-smi"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/c3sr/tracer"
 
 [[constraint]]
   name = "github.com/elazarl/go-bindata-assetfs"
