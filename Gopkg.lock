@@ -306,7 +306,7 @@
   revision = "8ec223752bfc2f65b7e37373a0ac0530ffb81509"
 
 [[projects]]
-  digest = "1:97263c69f0bcae47e0ab7c56305f50e3e0017db3a32ed6f3c3fa7ce2d2b0de68"
+  digest = "1:06e7cc9c95256a4df3b26d47d73cddd8b9f8c82f96d080f271eda1e9b8d9412c"
   name = "github.com/c3sr/dlframework"
   packages = [
     ".",
@@ -320,8 +320,8 @@
     "steps",
   ]
   pruneopts = "T"
-  revision = "d8df5b11974a9cdb8d45630e8d6ef40b622bd83a"
-  version = "v0.3.7"
+  revision = "9be27d933cff058874db60661574b98643a32c1c"
+  version = "v0.3.9"
 
 [[projects]]
   branch = "master"
@@ -452,7 +452,7 @@
   version = "v0.1.0"
 
 [[projects]]
-  digest = "1:464de95ea28e37c00eb2b72e2f948bd7b92a42f45fd2854316d10500c9700011"
+  digest = "1:dba9bdd1c5d58c2f2e9052941a19202d735ac8a1493c0405f210eb341ed07c0e"
   name = "github.com/c3sr/libkv"
   packages = [
     ".",
@@ -461,19 +461,8 @@
     "store/mock",
   ]
   pruneopts = "T"
-  revision = "c4babe84b7d1631c16262cec87705aec2398092b"
-  version = "v0.3.0"
-
-[[projects]]
-  digest = "1:ea30d063b67f397be1f4a6e0f8d0dbc5da588d8489f9621d97a7398934bbb80c"
-  name = "github.com/c3sr/lock"
-  packages = [
-    ".",
-    "registry",
-  ]
-  pruneopts = "T"
-  revision = "4002142a6a52b64cbc136d780ab0f63761906817"
-  version = "v0.1.0"
+  revision = "5fc3ba5881dce4d1f457d37f541f16401c356604"
+  version = "v0.3.1"
 
 [[projects]]
   digest = "1:453f416161e6ae53e8f4712096452b91a7afc3b98cff1568e3652d7821fa3b39"
