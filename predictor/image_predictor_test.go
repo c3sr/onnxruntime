@@ -106,7 +106,7 @@ func TestPredictorNew(t *testing.T) {
 
 func TestImageClassification(t *testing.T) {
 	onnxruntime.Register()
-	model, err := onnxruntime.FrameworkManifest.FindModel("Xception:1.0")
+	model, err := onnxruntime.FrameworkManifest.FindModel("MLPerf_Mobilenet_v1:1.0")
 	assert.NoError(t, err)
 	assert.NotEmpty(t, model)
 
@@ -115,7 +115,7 @@ func TestImageClassification(t *testing.T) {
 		device = options.CUDA_DEVICE
 	}
 
-	batchSize := 1
+	batchSize := 10
 	ctx := context.Background()
 	opts := options.New(options.Context(ctx),
 		options.Device(device, 0),
@@ -181,9 +181,11 @@ func TestImageClassification(t *testing.T) {
 		return
 	}
 
-	pp.Println("Index: ", pred[0][0].GetClassification().GetIndex())
-	pp.Println("Label: ", pred[0][0].GetClassification().GetLabel())
-	pp.Println("Probability: ", pred[0][0].GetProbability())
+	for i := 0; i < batchSize; i++ {
+		pp.Println("Index: ", pred[i][0].GetClassification().GetIndex())
+		pp.Println("Label: ", pred[i][0].GetClassification().GetLabel())
+		pp.Println("Probability: ", pred[i][0].GetProbability())
+	}
 
 	// The score not applied softmax for torchvision alexnet
 	// assert.InDelta(t, float32(0.702554), pred[0][0].GetProbability(), 0.001)
@@ -192,7 +194,7 @@ func TestImageClassification(t *testing.T) {
 
 func TestObjectDetection(t *testing.T) {
 	onnxruntime.Register()
-	model, err := onnxruntime.FrameworkManifest.FindModel("OnnxVision_SSD:1.0")
+	model, err := onnxruntime.FrameworkManifest.FindModel("MLPerf_SSD_ResNet34_1200x1200:1.0")
 	assert.NoError(t, err)
 	assert.NotEmpty(t, model)
 
@@ -268,7 +270,7 @@ func TestObjectDetection(t *testing.T) {
 	}
 
 	for ii, cnt := 0, 0; ii < len(pred[0]) && cnt < 3; ii++ {
-		if pred[0][ii].GetProbability() >= 0.5 {
+	//	if pred[0][ii].GetProbability() >= 0.5 {
 			cnt++
 			fmt.Printf("|                             | ./_fixtures/lane_control.jpg           | %s   | %.3f | %.3f | %.3f | %.3f | %.3f       |\n",
 				pred[0][ii].GetBoundingBox().GetLabel(),
@@ -277,7 +279,7 @@ func TestObjectDetection(t *testing.T) {
 				pred[0][ii].GetBoundingBox().GetYmin(),
 				pred[0][ii].GetBoundingBox().GetYmax(),
 				pred[0][ii].GetProbability())
-		}
+	//	}
 	}
 }
 

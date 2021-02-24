@@ -259,7 +259,12 @@ func (p *ImageClassificationPredictor) ReadPredictedFeatures(ctx context.Context
 		return nil, err
 	}
 
-	return p.CreateClassificationFeatures(ctx, outputs[0], p.labels)
+	index, err := p.GetOutputLayerIndex("probabilities_layer")
+	if err != nil {
+		index = 0
+	}
+
+	return p.CreateClassificationFeatures(ctx, outputs[index], p.labels)
 }
 
 // Reset ...
