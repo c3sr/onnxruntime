@@ -1,0 +1,57 @@
+name: MLPerf_SSD_ResNet34_1200x1200 # name of your model
+framework:
+    name: Onnxruntime # framework for the model
+    version: 1.6.0 # framework version constraint
+version: 1.0 # version information in semantic version format
+container: # containers used to perform model prediction
+    # multiple platforms can be specified
+    amd64:
+        cpu: raiproject/carml-onnxruntime:amd64-cpu
+        gpu: raiproject/carml-onnxruntime:amd64-gpu
+    ppc64le:
+        cpu: raiproject/carml-onnxruntime:ppc64le-gpu
+        gpu: raiproject/carml-onnxruntime:ppc64le-gpu
+description: >
+  MLPerf_SSD_ResNet34_1200x1200.
+references: # references to papers / websites / etc.. describing the model
+  - https://github.com/mlperf/inference/tree/master/v0.5/classification_and_detection
+  - https://github.com/mlperf/inference/tree/master/others/cloud/single_stage_detector/tensorflow
+license: Apache License, Version 2.0 # license of the model
+# inputs to the model
+inputs:
+    # first input type for the model
+    - type: image
+      # description of the first input
+      description: the input image
+      parameters: # type parameters
+          element_type: float32
+          input_layer: 0
+          layout: CHW
+          color_mode: RGB
+          dimensions: [3, 1200, 1200]
+output:
+    # the type of the output
+    type: boundingbox
+    # a description of the output parameter
+    description: the output bounding box # a description of the output parameter
+    parameters:
+        classes_layer: 1
+        boxes_layer: 0
+        probabilities_layer: 2
+        xmin_index: 1
+        ymin_index: 0
+        xmax_index: 3
+        ymax_index: 2
+        features_url: https://s3.amazonaws.com/store.carml.org/synsets/coco/coco_labels_2014_2017_background.txt
+        features_checksum: e7103a997c945e0f87c49a03c9c56a1b
+model: # specifies model graph and weights resources
+    graph_path: https://s3.amazonaws.com/store.carml.org/models/onnxruntime/resnet34-ssd1200.onnx
+    is_archive:
+        false # if set, then the base_url is a url to an archive
+        # the graph_path and weights_path then denote the
+        # file names of the graph and weights within the archive
+    graph_checksum: b70fc6c72bc9349981f3b1258f31bc87
+attributes: # extra network attributes
+    kind: CNN # the kind of neural network (CNN, RNN, ...)
+    training_dataset: COCO 2017 # dataset used to for training
+    manifest_author: Yen-Hsiang Chang

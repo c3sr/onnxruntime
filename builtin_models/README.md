@@ -50,6 +50,8 @@ Run `go test -run ImageClassification`
 | TorchVision_VGG_19          | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 0.991907    |
 | TorchVision_VGG_19_BN       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 0.998358    |
 | Xception                    | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 0.930981    |
+| MLPerf_ResNet_50_v1.5       | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 0.999421    |
+| MLPerf_Mobilenet_v1         | ../predictor/_fixtures/platypus.jpg | n01873310 platypus ... | 0.998053    |
 
 ### Image Object Detection
 Run `go test -run ObjectDetection`
