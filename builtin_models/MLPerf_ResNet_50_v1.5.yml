@@ -18,7 +18,7 @@ references:
   - https://github.com/mlperf/inference/tree/master/v0.5/classification_and_detection
   - https://github.com/mlperf/training/tree/master/image_classification
 # license of the model
-license: unrestricted
+license: Apache License, Version 2.0 # license of the model
 # inputs to the model
 inputs:
     # first input type for the model

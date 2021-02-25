@@ -19,10 +19,8 @@ references:
   - https://github.com/mlperf/inference/tree/master/v0.5/classification_and_detection
   - https://github.com/mlperf/training/tree/master/image_classification
   - https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md
-license: unrestricted
-# inputs to the model
 # license of the model
-license: unrestricted
+license: Apache License, Version 2.0 # license of the model
 # inputs to the model
 inputs:
     # first input type for the model
