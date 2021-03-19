@@ -15,7 +15,7 @@ import (
 	goonnxruntime "github.com/c3sr/go-onnxruntime"
 	"github.com/c3sr/onnxruntime"
 	"github.com/c3sr/tracer"
-	"github.com/k0kubun/pp"
+	"github.com/k0kubun/pp/v3"
 	opentracing "github.com/opentracing/opentracing-go"
 	olog "github.com/opentracing/opentracing-go/log"
 	"github.com/pkg/errors"

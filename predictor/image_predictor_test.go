@@ -16,7 +16,7 @@ import (
 	"github.com/c3sr/image/types"
 	nvidiasmi "github.com/c3sr/nvidia-smi"
 	"github.com/c3sr/onnxruntime"
-	"github.com/k0kubun/pp"
+	"github.com/k0kubun/pp/v3"
 	"github.com/stretchr/testify/assert"
 	gotensor "gorgonia.org/tensor"
 )
