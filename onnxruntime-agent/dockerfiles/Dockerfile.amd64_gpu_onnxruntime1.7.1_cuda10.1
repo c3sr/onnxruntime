@@ -1,0 +1,30 @@
+FROM c3sr/go-onnxruntime:amd64-gpu-onnxruntime1.7.1-cuda10.1-latest
+
+# Build-time metadata as defined at http://label-schema.org
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VCS_URL
+ARG VERSION
+ARG ARCH
+ARG ONNXRUNTIME_VERSION
+
+LABEL org.onnxruntime.agent.build-date=$BUILD_DATE \
+      org.onnxruntime.agent.name="onnxruntime agent" \
+      org.onnxruntime.agent.description="" \
+      org.onnxruntime.agent.url="https://www.mlmodelscope.org/" \
+      org.onnxruntime.agent.vcs-ref=$VCS_REF \
+      org.onnxruntime.agent.vcs-url=$VCS_URL \
+      org.onnxruntime.agent.vendor="MLModelScope" \
+      org.onnxruntime.agent.version=$VERSION \
+      org.onnxruntime.agent.schema-version="1.0"
+
+# Get Go bindings
+ENV PKG github.com/c3sr/onnxruntime
+WORKDIR /c3sr/onnxruntime
+
+RUN git clone --depth=1 --branch=master https://${PKG}.git .
+
+RUN cd onnxruntime-agent && \
+    go install -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}"
+
+ENTRYPOINT ["onnxruntime-agent"]
