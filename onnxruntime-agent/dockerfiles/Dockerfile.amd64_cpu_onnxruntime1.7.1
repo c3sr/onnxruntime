@@ -1,4 +1,4 @@
-FROM c3sr/go-onnxruntime:amd64-cpu-latest
+FROM c3sr/go-onnxruntime:amd64-cpu-onnxruntime1.7.1-latest
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -6,7 +6,8 @@ ARG VCS_REF
 ARG VCS_URL
 ARG VERSION
 ARG ARCH
-ARG FRAMEWORK_VERSION
+ARG ONNXRUNTIME_VERSION
+
 LABEL org.onnxruntime.agent.build-date=$BUILD_DATE \
       org.onnxruntime.agent.name="onnxruntime agent" \
       org.onnxruntime.agent.description="" \
@@ -17,18 +18,13 @@ LABEL org.onnxruntime.agent.build-date=$BUILD_DATE \
       org.onnxruntime.agent.version=$VERSION \
       org.onnxruntime.agent.schema-version="1.0"
 
-
 # Get Go bindings
 ENV PKG github.com/c3sr/onnxruntime
-WORKDIR $GOPATH/src/$PKG
+WORKDIR /c3sr/onnxruntime
 
 RUN git clone --depth=1 --branch=master https://${PKG}.git .
 
-RUN dep ensure -v -vendor-only
-
-RUN go install -tags=nogpu -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
-    cd onnxruntime-agent && \
-    go install -tags=nogpu && \
-    cd ..
+RUN cd onnxruntime-agent && \
+    go install -a -tags=nogpu -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}"
 
 ENTRYPOINT ["onnxruntime-agent"]
