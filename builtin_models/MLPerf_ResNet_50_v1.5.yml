@@ -3,14 +3,6 @@ framework:
     name: Onnxruntime # framework for the model
     version: 1.6.0 # framework version constraint
 version: 1.0 # version information in semantic version format
-container: # containers used to perform model prediction
-    # multiple platforms can be specified
-    amd64:
-        cpu: raiproject/carml-onnxruntime:amd64-cpu
-        gpu: raiproject/carml-onnxruntime:amd64-gpu
-    ppc64le:
-        cpu: raiproject/carml-onnxruntime:ppc64le-gpu
-        gpu: raiproject/carml-onnxruntime:ppc64le-gpu
 description: >
   MLPerf_ResNet50_v1.5.
 references:
@@ -41,8 +33,8 @@ output:
         # type parameters
         element_type: float32
         probabilities_layer: 1
-        features_url: https://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset1.txt
-        features_checksum: 6c05083991207dea5c37f2d271014fad
+        features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset.txt
+        features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources
     graph_path: https://s3.amazonaws.com/store.carml.org/models/onnxruntime/resnet50_v1.onnx
     is_archive:
@@ -50,6 +42,50 @@ model: # specifies model graph and weights resources
         # the graph_path and weights_path then denote the
         # file names of the graph and weights within the archive
     graph_checksum: a638cf028b5870da29e09ccc2f7182e7
+preprocess: |
+  import numpy as np
+  import cv2
+  def center_crop(img, out_height, out_width):
+    height, width, _ = img.shape
+    left = int((width - out_width) / 2)
+    right = int((width + out_width) / 2)
+    top = int((height - out_height) / 2)
+    bottom = int((height + out_height) / 2)
+    img = img[top:bottom, left:right]
+    return img
+  def resize_with_aspectratio(img, out_height, out_width, scale=87.5, inter_pol=cv2.INTER_LINEAR):
+    height, width, _ = img.shape
+    new_height = int(100. * out_height / scale)
+    new_width = int(100. * out_width / scale)
+    if height > width:
+      w = new_width
+      h = int(new_height * height / width)
+    else:
+      h = new_height
+      w = int(new_width * width / height)
+    img = cv2.resize(img, (w, h), interpolation=inter_pol)
+    return img
+  def pre_process_vgg(img, dims=None, need_transpose=False):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    output_height, output_width, _ = dims
+    cv2_interpol = cv2.INTER_AREA
+    img = resize_with_aspectratio(img, output_height, output_width, inter_pol=cv2_interpol)
+    img = center_crop(img, output_height, output_width)
+    img = np.asarray(img, dtype='float32')
+
+    means = np.array([123.68, 116.78, 103.94], dtype=np.float32)
+    img -= means
+
+    if need_transpose:
+      img = img.transpose([2, 0, 1])
+    return img
+  def preprocess(ctx, data):
+    img = cv2.imread(data)
+    return pre_process_vgg(img, [224, 224, 3], True)
+postprocess: |
+  def postprocess(ctx, data):
+    return data[1][:, 1:].tolist()
+
 attributes: # extra network attributes
     kind: CNN # the kind of neural network (CNN, RNN, ...)
     training_dataset: ImageNet # dataset used to for training

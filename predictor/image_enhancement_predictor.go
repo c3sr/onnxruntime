@@ -256,16 +256,35 @@ func (p *ImageEnhancementPredictor) ReadPredictedFeatures(ctx context.Context) (
 	return p.CreateRawImageFeatures(ctx, e)
 }
 
+// ReadPredictedFeaturesAsMap ...
+func (p *ImageEnhancementPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[string]interface{}, error) {
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features_as_map")
+	defer span.Finish()
+
+	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	res := make(map[string]interface{})
+	res["outputs"] = outputs
+
+	return res, nil
+}
+
+// Reset ...
 func (p *ImageEnhancementPredictor) Reset(ctx context.Context) error {
 
 	return nil
 }
 
+// Close ...
 func (p *ImageEnhancementPredictor) Close() error {
 	return nil
 }
 
-func (p ImageEnhancementPredictor) Modality() (dlframework.Modality, error) {
+// Modality ...
+func (p *ImageEnhancementPredictor) Modality() (dlframework.Modality, error) {
 	return dlframework.ImageEnhancementModality, nil
 }
 

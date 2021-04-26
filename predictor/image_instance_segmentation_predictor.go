@@ -324,6 +324,23 @@ func (p *InstanceSegmentationPredictor) ReadPredictedFeatures(ctx context.Contex
 	return p.CreateInstanceSegmentFeatures(ctx, [][]float32{probabilities}, [][]float32{classes}, [][][]float32{boxes}, [][][][]float32{masks}, p.labels)
 }
 
+// ReadPredictedFeaturesAsMap ...
+func (p *InstanceSegmentationPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[string]interface{}, error) {
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features_as_map")
+	defer span.Finish()
+
+	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	res := make(map[string]interface{})
+	res["outputs"] = outputs
+	res["labels"] = p.labels
+
+	return res, nil
+}
+
 // Reset ...
 func (p *InstanceSegmentationPredictor) Reset(ctx context.Context) error {
 	return nil
@@ -337,6 +354,7 @@ func (p *InstanceSegmentationPredictor) Close() error {
 	return nil
 }
 
+// Modality ...
 func (p *InstanceSegmentationPredictor) Modality() (dlframework.Modality, error) {
 	return dlframework.ImageInstanceSegmentationModality, nil
 }

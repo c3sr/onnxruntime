@@ -267,6 +267,24 @@ func (p *ImageClassificationPredictor) ReadPredictedFeatures(ctx context.Context
 	return p.CreateClassificationFeatures(ctx, outputs[index], p.labels)
 }
 
+// ReadPredictedFeaturesAsMap ...
+func (p *ImageClassificationPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[string]interface{}, error) {
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features_as_map")
+	defer span.Finish()
+
+	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	res := make(map[string]interface{})
+	res["outputs"] = outputs
+	res["labels"] = p.labels
+
+	return res, nil
+}
+
+
 // Reset ...
 func (p *ImageClassificationPredictor) Reset(ctx context.Context) error {
 	return nil
@@ -280,6 +298,7 @@ func (p *ImageClassificationPredictor) Close() error {
 	return nil
 }
 
+// Modality ...
 func (p *ImageClassificationPredictor) Modality() (dlframework.Modality, error) {
 	return dlframework.ImageClassificationModality, nil
 }
