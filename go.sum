@@ -179,10 +179,16 @@ github.com/c3sr/dlframework v1.1.3-0.20210426025211-a00f48984567 h1:rQWvY0+GiudP
 github.com/c3sr/dlframework v1.1.3-0.20210426025211-a00f48984567/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
 github.com/c3sr/dlframework v1.1.3-0.20210426033749-693bbb880012 h1:J3gCdfnM3ezAtsHypSFVF60fU+qDO7M2pKgWLn7OoO4=
 github.com/c3sr/dlframework v1.1.3-0.20210426033749-693bbb880012/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
+github.com/c3sr/dlframework v1.1.3-0.20210501193931-305c1e5c2169 h1:ziPoTAX8tj5mqTYN1ALBaMLI2DNfVw/i+0AZdsL4eqI=
+github.com/c3sr/dlframework v1.1.3-0.20210501193931-305c1e5c2169/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
+github.com/c3sr/dlframework v1.1.3-0.20210501200206-0639a1f6aab5 h1:tW5QGSUsoVvs5azDupV0Tbl81xI3U2ysowIU0OKhrWQ=
+github.com/c3sr/dlframework v1.1.3-0.20210501200206-0639a1f6aab5/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
 github.com/c3sr/dlframework v1.2.0 h1:PdOgRa5Mog1LGbPHDJFwF39uc0NTGDWlRNuj17NDu6c=
 github.com/c3sr/dlframework v1.2.0/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
 github.com/c3sr/dlframework v1.2.1 h1:htGklIFnZAMy4XxsHlJsxNdAzP/iDjZCGjgHC4DMiso=
 github.com/c3sr/dlframework v1.2.1/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
+github.com/c3sr/dlframework v1.2.2 h1:zyIhEVKVSxBX2mBBoWULcoug8rNt+VwOUWKKCe6DvtU=
+github.com/c3sr/dlframework v1.2.2/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
 github.com/c3sr/downloadmanager v1.0.0 h1:iyrfSy4k8N514LyW/IPhmt1M3lC6tSRB5VX9Dv18g1k=
 github.com/c3sr/downloadmanager v1.0.0/go.mod h1:YqQ+Ps7QIjsu0vZ5DQekJfsZ5ferSd1r4Rr4wG6RmwI=
 github.com/c3sr/go-cupti v1.0.1 h1:TW4U/uhw/kdTw+cMs5Yf/QmZVB8hS096hWLWybYddps=
@@ -197,6 +203,8 @@ github.com/c3sr/go-onnxruntime v1.1.0 h1:XjlGKdPg4R6vFYFN7/NYx30Gnsn8TNAp6Oadpn3
 github.com/c3sr/go-onnxruntime v1.1.0/go.mod h1:xGHXutIeYXAs0KU5cvDPP9RnpMLk7fN6qPHJ0ti0frE=
 github.com/c3sr/go-onnxruntime v1.1.1 h1:gaZEKB6dmyNbVP6d3+2hFqzuJT78BMtZz1fHtTNLjAI=
 github.com/c3sr/go-onnxruntime v1.1.1/go.mod h1:2az7na61hjVk+DmQc57i5UW/TBiGC5LVZntlM2bDLAM=
+github.com/c3sr/go-onnxruntime v1.1.2 h1:Rcu8fEtlltbxvyFejtLorYlV1br5mQQ493Gg+VWunoA=
+github.com/c3sr/go-onnxruntime v1.1.2/go.mod h1:xdiyFYyXk1hGjFlKHgy5dxNJ6f0VPhqaJFeHvkmfK+8=
 github.com/c3sr/go-python3 v0.0.0-20210424014611-ae173b2e6908 h1:I7ZgyAAP+Y2k5bA1smp49mNWdme6seq0qz94L8xyJzU=
 github.com/c3sr/go-python3 v0.0.0-20210424014611-ae173b2e6908/go.mod h1:6rv4k8m/sCXIMEXPHGC5hG1Cgsl/mylZ5rbdhVfaoGQ=
 github.com/c3sr/grpc v1.0.0 h1:qsL5COvhVoxlycUcfKlUvNnS0ILlDcbiWKAt2xxhqAE=

@@ -73,7 +73,7 @@ preprocess: |
     img = center_crop(img, output_height, output_width)
     img = np.asarray(img, dtype='float32')
 
-    means = np.array([123.68, 116.78, 103.94], dtype=np.float32)
+    means = np.array([123.68, 116.78, 103.94])
     img -= means
 
     if need_transpose:
