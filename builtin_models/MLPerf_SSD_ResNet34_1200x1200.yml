@@ -3,14 +3,6 @@ framework:
     name: Onnxruntime # framework for the model
     version: 1.6.0 # framework version constraint
 version: 1.0 # version information in semantic version format
-container: # containers used to perform model prediction
-    # multiple platforms can be specified
-    amd64:
-        cpu: raiproject/carml-onnxruntime:amd64-cpu
-        gpu: raiproject/carml-onnxruntime:amd64-gpu
-    ppc64le:
-        cpu: raiproject/carml-onnxruntime:ppc64le-gpu
-        gpu: raiproject/carml-onnxruntime:ppc64le-gpu
 description: >
   MLPerf_SSD_ResNet34_1200x1200.
 references: # references to papers / websites / etc.. describing the model
@@ -53,6 +45,56 @@ model: # specifies model graph and weights resources
         # the graph_path and weights_path then denote the
         # file names of the graph and weights within the archive
     graph_checksum: b70fc6c72bc9349981f3b1258f31bc87
+preprocess: |
+  import numpy as np
+  import cv2
+  def maybe_resize(img, dims):
+    img = np.array(img, dtype=np.float32)
+    if len(img.shape) < 3 or img.shape[2] != 3:
+      # some images might be grayscale
+      img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    if dims != None:
+      im_height, im_width, _ = dims
+      img = cv2.resize(img, (im_width, im_height), interpolation=cv2.INTER_LINEAR)
+    return img
+  def pre_process_coco_resnet34(img, dims=None, need_transpose=False):
+    img = maybe_resize(img, dims)
+    mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
+    std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
+
+    img = img / 255. - mean
+    img = img / std
+
+    if need_transpose:
+      img = img.transpose([2, 0, 1])
+
+    return img
+  def preprocess(ctx, data):
+    img = cv2.imread(data)
+    return pre_process_coco_resnet34(img, [1200, 1200, 3], True)
+postprocess: |
+  def postprocess(ctx, data):
+    n = len(data[0])
+    probabilities = []
+    classes = []
+    boxes = []
+    for i in range(n):
+      probabilities.append([])
+      classes.append([])
+      boxes.append([])
+      detection_boxes = data[0][i]
+      detection_classes = data[1][i]
+      scores = data[2][i]
+      for detection in range(len(scores)):
+        if scores[detection] < 0.5:
+          break
+        probabilities[-1].append(scores[detection])
+        classes[-1].append(float(detection_classes[detection]))
+        box = detection_boxes[detection]
+        boxes[-1].append([box[1], box[0], box[3], box[2]])
+
+    return probabilities, classes, boxes
 attributes: # extra network attributes
     kind: CNN # the kind of neural network (CNN, RNN, ...)
     training_dataset: COCO 2017 # dataset used to for training
