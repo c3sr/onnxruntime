@@ -87,7 +87,7 @@ postprocess: |
       detection_classes = data[1][i]
       scores = data[2][i]
       for detection in range(len(scores)):
-        if scores[detection] < 0.5:
+        if scores[detection] < 0.05:
           break
         probabilities[-1].append(scores[detection])
         classes[-1].append(float(detection_classes[detection]))
