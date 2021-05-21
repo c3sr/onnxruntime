@@ -1,4 +1,4 @@
-name: MLPerf_ResNet50_v1.5 # name of your model
+name: MLPerf_ResNet_50_v1.5 # name of your model
 framework:
     name: Onnxruntime # framework for the model
     version: 1.6.0 # framework version constraint

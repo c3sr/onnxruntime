@@ -11,7 +11,7 @@ replace (
 
 require (
 	github.com/c3sr/config v1.0.1
-	github.com/c3sr/dlframework v1.3.0
+	github.com/c3sr/dlframework v1.3.1
 	github.com/c3sr/downloadmanager v1.0.0
 	github.com/c3sr/go-onnxruntime v1.1.2
 	github.com/c3sr/image v1.0.0
