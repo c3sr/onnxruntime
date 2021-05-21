@@ -217,36 +217,14 @@ func (p *ImageClassificationPredictor) loadPredictor(ctx context.Context) error 
 
 // Predict ...
 func (p *ImageClassificationPredictor) Predict(ctx context.Context, data interface{}, opts ...options.Option) error {
-
 	if data == nil {
 		return errors.New("input data nil")
 	}
-
-	gotensors, ok := data.([]*gotensor.Dense)
+	gotensors, ok := data.([]gotensor.Tensor)
 	if !ok {
-		return errors.New("input data is not slice of dense tensors")
+		return errors.New("input data is not slice of tensors")
 	}
-
-	fst := gotensors[0]
-	dims := append([]int{len(gotensors)}, fst.Shape()...)
-	// TODO: support data types other than float32
-	var input []float32
-	for _, t := range gotensors {
-		input = append(input, t.Float32s()...)
-	}
-
-	err := p.predictor.Predict(ctx, []gotensor.Tensor{
-		gotensor.New(
-			gotensor.Of(gotensor.Float32),
-			gotensor.WithBacking(input),
-			gotensor.WithShape(dims...),
-		),
-	})
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return p.predictor.Predict(ctx, gotensors)
 }
 
 // ReadPredictedFeatures ...
@@ -283,7 +261,6 @@ func (p *ImageClassificationPredictor) ReadPredictedFeaturesAsMap(ctx context.Co
 
 	return res, nil
 }
-
 
 // Reset ...
 func (p *ImageClassificationPredictor) Reset(ctx context.Context) error {
