@@ -15,7 +15,6 @@ import (
 	goonnxruntime "github.com/c3sr/go-onnxruntime"
 	"github.com/c3sr/onnxruntime"
 	"github.com/c3sr/tracer"
-	"github.com/k0kubun/pp/v3"
 	opentracing "github.com/opentracing/opentracing-go"
 	olog "github.com/opentracing/opentracing-go/log"
 	"github.com/pkg/errors"
@@ -221,34 +220,11 @@ func (p *SemanticSegmentationPredictor) Predict(ctx context.Context, data interf
 	if data == nil {
 		return errors.New("input data nil")
 	}
-
-	gotensors, ok := data.([]*gotensor.Dense)
+	gotensors, ok := data.([]gotensor.Tensor)
 	if !ok {
-		return errors.New("input data is not slice of dense tensors")
+		return errors.New("input data is not slice of tensors")
 	}
-
-	fst := gotensors[0]
-	dims := append([]int{len(gotensors)}, fst.Shape()...)
-	// debug
-	pp.Println(dims)
-	// TODO: support data types other than float32
-	var input []float32
-	for _, t := range gotensors {
-		input = append(input, t.Float32s()...)
-	}
-
-	err := p.predictor.Predict(ctx, []gotensor.Tensor{
-		gotensor.New(
-			gotensor.Of(gotensor.Float32),
-			gotensor.WithBacking(input),
-			gotensor.WithShape(dims...),
-		),
-	})
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return p.predictor.Predict(ctx, gotensors)
 }
 
 // ReadPredictedFeatures ...
@@ -292,6 +268,23 @@ func (p *SemanticSegmentationPredictor) ReadPredictedFeatures(ctx context.Contex
 	return p.CreateSemanticSegmentFeatures(ctx, masks, labels)
 }
 
+// ReadPredictedFeaturesAsMap ...
+func (p *SemanticSegmentationPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[string]interface{}, error) {
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features_as_map")
+	defer span.Finish()
+
+	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	res := make(map[string]interface{})
+	res["outputs"] = outputs
+	res["labels"] = p.labels
+
+	return res, nil
+}
+
 // Reset ...
 func (p *SemanticSegmentationPredictor) Reset(ctx context.Context) error {
 	return nil
@@ -305,6 +298,7 @@ func (p *SemanticSegmentationPredictor) Close() error {
 	return nil
 }
 
+// Modality ...
 func (p *SemanticSegmentationPredictor) Modality() (dlframework.Modality, error) {
 	return dlframework.ImageSemanticSegmentationModality, nil
 }

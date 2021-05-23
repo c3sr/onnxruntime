@@ -217,36 +217,16 @@ func (p *InstanceSegmentationPredictor) loadPredictor(ctx context.Context) error
 
 // Predict ...
 func (p *InstanceSegmentationPredictor) Predict(ctx context.Context, data interface{}, opts ...options.Option) error {
+	// TODO: right now the only model for instance segmentation accepts CHW without batch
+	// This will cause an error since the gotensors[0] now is in NCHW format
 	if data == nil {
 		return errors.New("input data nil")
 	}
-
-	gotensors, ok := data.([]*gotensor.Dense)
+	gotensors, ok := data.([]gotensor.Tensor)
 	if !ok {
-		return errors.New("input data is not slice of dense tensors")
+		return errors.New("input data is not slice of tensors")
 	}
-
-	fst := gotensors[0]
-	// TODO: right now the only model for instance segmentation accepts CHW without batch
-	dims := fst.Shape()
-	// TODO support data types other than float32
-	var input []float32
-	for _, t := range gotensors {
-		input = append(input, t.Float32s()...)
-	}
-
-	err := p.predictor.Predict(ctx, []gotensor.Tensor{
-		gotensor.New(
-			gotensor.Of(gotensor.Float32),
-			gotensor.WithBacking(input),
-			gotensor.WithShape(dims...),
-		),
-	})
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return p.predictor.Predict(ctx, gotensors)
 }
 
 // ReadPredictedFeatures ...
@@ -324,6 +304,23 @@ func (p *InstanceSegmentationPredictor) ReadPredictedFeatures(ctx context.Contex
 	return p.CreateInstanceSegmentFeatures(ctx, [][]float32{probabilities}, [][]float32{classes}, [][][]float32{boxes}, [][][][]float32{masks}, p.labels)
 }
 
+// ReadPredictedFeaturesAsMap ...
+func (p *InstanceSegmentationPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[string]interface{}, error) {
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features_as_map")
+	defer span.Finish()
+
+	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	res := make(map[string]interface{})
+	res["outputs"] = outputs
+	res["labels"] = p.labels
+
+	return res, nil
+}
+
 // Reset ...
 func (p *InstanceSegmentationPredictor) Reset(ctx context.Context) error {
 	return nil
@@ -337,6 +334,7 @@ func (p *InstanceSegmentationPredictor) Close() error {
 	return nil
 }
 
+// Modality ...
 func (p *InstanceSegmentationPredictor) Modality() (dlframework.Modality, error) {
 	return dlframework.ImageInstanceSegmentationModality, nil
 }

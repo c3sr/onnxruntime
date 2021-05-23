@@ -156,7 +156,7 @@ func TestImageClassification(t *testing.T) {
 	imgOpts = append(imgOpts, raiimage.ResizeAlgorithm(types.ResizeAlgorithmLinear))
 	resized, err := raiimage.Resize(img, imgOpts...)
 
-	input := make([]*gotensor.Dense, batchSize)
+	input := make([]gotensor.Tensor, batchSize)
 	imgFloats, err := normalizeImageCHW(resized, preprocessOpts.MeanImage, preprocessOpts.Scale)
 	if err != nil {
 		panic(err)
@@ -169,7 +169,14 @@ func TestImageClassification(t *testing.T) {
 		)
 	}
 
-	err = predictor.Predict(ctx, input)
+	joined, err := gotensor.Concat(0, input[0], input[1:]...)
+	if err != nil {
+		return
+	}
+	joined.Reshape(append([]int{len(input)}, input[0].Shape()...)...)
+
+	err = predictor.Predict(ctx, []gotensor.Tensor{joined})
+
 	assert.NoError(t, err)
 	if err != nil {
 		return
@@ -244,7 +251,7 @@ func TestObjectDetection(t *testing.T) {
 	imgOpts = append(imgOpts, raiimage.ResizeAlgorithm(types.ResizeAlgorithmLinear))
 	resized, err := raiimage.Resize(img, imgOpts...)
 
-	input := make([]*gotensor.Dense, batchSize)
+	input := make([]gotensor.Tensor, batchSize)
 	imgFloats, err := normalizeImageCHW(resized, preprocessOpts.MeanImage, preprocessOpts.Scale)
 	if err != nil {
 		panic(err)
@@ -257,7 +264,14 @@ func TestObjectDetection(t *testing.T) {
 		)
 	}
 
-	err = predictor.Predict(ctx, input)
+	joined, err := gotensor.Concat(0, input[0], input[1:]...)
+	if err != nil {
+		return
+	}
+	joined.Reshape(append([]int{len(input)}, input[0].Shape()...)...)
+
+	err = predictor.Predict(ctx, []gotensor.Tensor{joined})
+
 	assert.NoError(t, err)
 	if err != nil {
 		return
@@ -270,16 +284,16 @@ func TestObjectDetection(t *testing.T) {
 	}
 
 	for ii, cnt := 0, 0; ii < len(pred[0]) && cnt < 3; ii++ {
-	//	if pred[0][ii].GetProbability() >= 0.5 {
-			cnt++
-			fmt.Printf("|                             | ./_fixtures/lane_control.jpg           | %s   | %.3f | %.3f | %.3f | %.3f | %.3f       |\n",
-				pred[0][ii].GetBoundingBox().GetLabel(),
-				pred[0][ii].GetBoundingBox().GetXmin(),
-				pred[0][ii].GetBoundingBox().GetXmax(),
-				pred[0][ii].GetBoundingBox().GetYmin(),
-				pred[0][ii].GetBoundingBox().GetYmax(),
-				pred[0][ii].GetProbability())
-	//	}
+		//	if pred[0][ii].GetProbability() >= 0.5 {
+		cnt++
+		fmt.Printf("|                             | ./_fixtures/lane_control.jpg           | %s   | %.3f | %.3f | %.3f | %.3f | %.3f       |\n",
+			pred[0][ii].GetBoundingBox().GetLabel(),
+			pred[0][ii].GetBoundingBox().GetXmin(),
+			pred[0][ii].GetBoundingBox().GetXmax(),
+			pred[0][ii].GetBoundingBox().GetYmin(),
+			pred[0][ii].GetBoundingBox().GetYmax(),
+			pred[0][ii].GetProbability())
+		//	}
 	}
 }
 
@@ -335,7 +349,7 @@ func TestInstanceSegmentation(t *testing.T) {
 	imgOpts = append(imgOpts, raiimage.ResizeAlgorithm(types.ResizeAlgorithmLinear))
 	resized, err := raiimage.Resize(img, imgOpts...)
 
-	input := make([]*gotensor.Dense, batchSize)
+	input := make([]gotensor.Tensor, batchSize)
 	imgFloats, err := normalizeImageCHW(resized, preprocessOpts.MeanImage, preprocessOpts.Scale)
 	if err != nil {
 		panic(err)
@@ -348,7 +362,14 @@ func TestInstanceSegmentation(t *testing.T) {
 		)
 	}
 
-	err = predictor.Predict(ctx, input)
+	joined, err := gotensor.Concat(0, input[0], input[1:]...)
+	if err != nil {
+		return
+	}
+	joined.Reshape(append([]int{len(input)}, input[0].Shape()...)...)
+
+	err = predictor.Predict(ctx, []gotensor.Tensor{joined})
+
 	assert.NoError(t, err)
 	if err != nil {
 		return
@@ -414,7 +435,7 @@ func TestSemanticSegmentation(t *testing.T) {
 	width := img.Bounds().Dx()
 	channels := 3
 
-	input := make([]*gotensor.Dense, batchSize)
+	input := make([]gotensor.Tensor, batchSize)
 	imgFloats, err := normalizeImageCHW(img, preprocessOpts.MeanImage, preprocessOpts.Scale)
 	if err != nil {
 		panic(err)
@@ -427,7 +448,14 @@ func TestSemanticSegmentation(t *testing.T) {
 		)
 	}
 
-	err = predictor.Predict(ctx, input)
+	joined, err := gotensor.Concat(0, input[0], input[1:]...)
+	if err != nil {
+		return
+	}
+	joined.Reshape(append([]int{len(input)}, input[0].Shape()...)...)
+
+	err = predictor.Predict(ctx, []gotensor.Tensor{joined})
+
 	assert.NoError(t, err)
 	if err != nil {
 		return
@@ -494,7 +522,7 @@ func TestImageEnhancement(t *testing.T) {
 	height := img.Bounds().Dy()
 	width := img.Bounds().Dx()
 
-	input := make([]*gotensor.Dense, batchSize)
+	input := make([]gotensor.Tensor, batchSize)
 	imgFloats, err := normalizeImageCHW(img, preprocessOpts.MeanImage, preprocessOpts.Scale)
 	if err != nil {
 		panic(err)
@@ -507,7 +535,14 @@ func TestImageEnhancement(t *testing.T) {
 		)
 	}
 
-	err = predictor.Predict(ctx, input)
+	joined, err := gotensor.Concat(0, input[0], input[1:]...)
+	if err != nil {
+		return
+	}
+	joined.Reshape(append([]int{len(input)}, input[0].Shape()...)...)
+
+	err = predictor.Predict(ctx, []gotensor.Tensor{joined})
+
 	assert.NoError(t, err)
 	if err != nil {
 		return
