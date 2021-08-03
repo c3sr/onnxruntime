@@ -3,14 +3,6 @@ framework:
     name: Onnxruntime # framework for the model
     version: 1.6.0 # framework version constraint
 version: 1.0 # version information in semantic version format
-container: # containers used to perform model prediction
-    # multiple platforms can be specified
-    amd64:
-        cpu: raiproject/carml-onnxruntime:amd64-cpu
-        gpu: raiproject/carml-onnxruntime:amd64-gpu
-    ppc64le:
-        cpu: raiproject/carml-onnxruntime:ppc64le-gpu
-        gpu: raiproject/carml-onnxruntime:ppc64le-gpu
 description: >
     This model is a replication of the model described in the ResNet publication.
     All pre-trained models expect input images normalized in the same way, i.e. mini-batches of 3-channel RGB images of shape (3 x H x W), where H and W are expected to be at least 224. The images have to be loaded in to a range of [0, 1] and then normalized using mean = [0.485, 0.456, 0.406] and std = [0.229, 0.224, 0.225]
@@ -53,6 +45,22 @@ model: # specifies model graph and weights resources
         # the graph_path and weights_path then denote the
         # file names of the graph and weights within the archive
     graph_checksum: 3395fe6af20cd222d92a6989454973d4
+preprocess: |
+  from torchvision import transforms
+  from PIL import Image
+  preprocessor = transforms.Compose([
+    transforms.Resize(256),
+    transforms.CenterCrop(224),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+  ])
+  def preprocess(ctx, data):
+    img = Image.open(data).convert('RGB')
+    return preprocessor(img).numpy()
+postprocess: |
+  from scipy.special import softmax
+  def postprocess(ctx, data):
+    return softmax(data[0], axis = 1).tolist()
 attributes: # extra network attributes
     kind: CNN # the kind of neural network (CNN, RNN, ...)
     training_dataset: ImageNet # dataset used to for training
