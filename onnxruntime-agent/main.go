@@ -14,15 +14,11 @@ import (
 )
 
 var (
-	modelName    string
-	modelVersion string
-	hostName, _  = os.Hostname()
-	framework    = onnxruntime.FrameworkManifest
 	log          *logrus.Entry
 )
 
 func main() {
-	rootCmd, err := cmd.NewRootCommand(onnxruntime.Register, framework)
+	rootCmd, err := cmd.NewRootCommand(onnxruntime.Register, onnxruntime.FrameworkManifest)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(-1)
