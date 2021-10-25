@@ -8,11 +8,9 @@ import (
 	"github.com/c3sr/dlframework/framework/agent"
 	"github.com/c3sr/dlframework/framework/options"
 	common "github.com/c3sr/dlframework/framework/predictor"
-	"github.com/c3sr/downloadmanager"
 	goonnxruntime "github.com/c3sr/go-onnxruntime"
 	"github.com/c3sr/onnxruntime"
 	"github.com/c3sr/tracer"
-	opentracing "github.com/opentracing/opentracing-go"
 	olog "github.com/opentracing/opentracing-go/log"
 	"github.com/pkg/errors"
 	gotensor "gorgonia.org/tensor"
@@ -37,34 +35,6 @@ func NewGeneralPredictor(model dlframework.ModelManifest, os ...options.Option) 
 	return predictor.Load(ctx, model, os...)
 }
 
-// Download ...
-func (p *GeneralPredictor) Download(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) error {
-	framework, err := model.ResolveFramework()
-	if err != nil {
-		return err
-	}
-
-	workDir, err := model.WorkDir()
-	if err != nil {
-		return err
-	}
-
-	gp := &GeneralPredictor{
-		Base: common.Base{
-			Framework: framework,
-			Model:     model,
-			WorkDir:   workDir,
-			Options:   options.New(opts...),
-		},
-	}
-
-	if err = gp.download(ctx); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 // Load ...
 func (p *GeneralPredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
 	framework, err := model.ResolveFramework()
@@ -86,56 +56,11 @@ func (p *GeneralPredictor) Load(ctx context.Context, model dlframework.ModelMani
 		},
 	}
 
-	if err = gp.download(ctx); err != nil {
-		return nil, err
-	}
-
 	if err = gp.loadPredictor(ctx); err != nil {
 		return nil, err
 	}
 
 	return gp, nil
-}
-
-func (p *GeneralPredictor) download(ctx context.Context) error {
-	span, ctx := tracer.StartSpanFromContext(
-		ctx,
-		tracer.APPLICATION_TRACE,
-		"download",
-		opentracing.Tags{
-			"graph_url":         p.GetGraphUrl(),
-			"target_graph_file": p.GetGraphPath(),
-		},
-	)
-	defer span.Finish()
-
-	model := p.Model
-	if model.Model.IsArchive {
-		baseURL := model.Model.BaseUrl
-		span.LogFields(
-			olog.String("event", "download model archive"),
-		)
-		_, err := downloadmanager.DownloadInto(baseURL, p.WorkDir, downloadmanager.Context(ctx))
-		if err != nil {
-			return errors.Wrapf(err, "failed to download model archive from %v", model.Model.BaseUrl)
-		}
-	} else {
-		span.LogFields(
-			olog.String("event", "download graph"),
-		)
-		checksum := p.GetGraphChecksum()
-		if checksum != "" {
-			if _, _, err := downloadmanager.DownloadFile(p.GetGraphUrl(), p.GetGraphPath(), downloadmanager.MD5Sum(checksum)); err != nil {
-				return err
-			}
-		} else {
-			if _, _, err := downloadmanager.DownloadFile(p.GetGraphUrl(), p.GetGraphPath()); err != nil {
-				return err
-			}
-		}
-	}
-
-	return nil
 }
 
 func (p *GeneralPredictor) loadPredictor(ctx context.Context) error {
@@ -179,11 +104,6 @@ func (p *GeneralPredictor) Predict(ctx context.Context, data interface{}, opts .
 	return p.predictor.Predict(ctx, gotensors)
 }
 
-// ReadPredictedFeatures ...
-func (p *GeneralPredictor) ReadPredictedFeatures(ctx context.Context) ([]dlframework.Features, error) {
-	return nil, errors.New("Not Implemented.")
-}
-
 // ReadPredictedFeaturesAsMap ...
 func (p *GeneralPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[string]interface{}, error) {
 	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features_as_map")
@@ -196,6 +116,10 @@ func (p *GeneralPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[
 
 	res := make(map[string]interface{})
 	res["outputs"] = outputs
+
+	if labels, err := p.GetLabels(); err == nil {
+		res["labels"] = labels
+	}
 
 	return res, nil
 }
