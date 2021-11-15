@@ -169,6 +169,7 @@ github.com/c3sr/config v1.0.1/go.mod h1:Tvk8WWvkNP1nOQy1e0JFeY/9W46YZWI1i9nhcXKU
 github.com/c3sr/cpu v1.0.0/go.mod h1:VEoMcqKAF+EPzYLm3qOemn+b4z+gPr2phh7TJl7bFsI=
 github.com/c3sr/database v1.0.0 h1:2rgaj6Z868JymmeQimq29PE3yadp20JjGUF7NFpt3eU=
 github.com/c3sr/database v1.0.0/go.mod h1:WpseZN/vRDAj+RLC4ZEPLFjU/ZRLAGqGQHrOPWeKbEY=
+github.com/c3sr/dldataset v0.0.0-20211114224851-8db5b79de012 h1:UT/2T/q/fqwNmjTcE7xGoozS2OK057/VJqaOSERS9EA=
 github.com/c3sr/dldataset v0.0.0-20211114224851-8db5b79de012/go.mod h1:tg0Ij8taRxby6z8xQ/tFaElyie78OytgMr4vat1g8/Y=
 github.com/c3sr/dlframework v1.4.2 h1:0fberjsTWPD9WbydOANNQvFpLpkRFnM7lgnvogAf3T0=
 github.com/c3sr/dlframework v1.4.2/go.mod h1:IMQ6UDENSc1uV/5VkJQ16ymQwLC8Za75NdTX3OiIt5I=
