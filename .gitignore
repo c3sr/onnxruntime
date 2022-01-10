@@ -3,3 +3,4 @@
 .vscode
 vendor
 onnxruntime-agent/onnxruntime-agent
+data
