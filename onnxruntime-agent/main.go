@@ -18,13 +18,15 @@ var (
 )
 
 func main() {
-	rootCmd, err := cmd.NewRootCommand(onnxruntime.Register, onnxruntime.FrameworkManifest)
-	if err != nil {
+  //rootCmd, err := cmd.NewRootCommand(onnxruntime.Register, onnxruntime.FrameworkManifest)
+  rootCmd, err := cmd.NewMqWorkerServer(onnxruntime.FrameworkManifest, nil)
+  if err != nil {
 		fmt.Println(err)
 		os.Exit(-1)
 	}
 
 	defer tracer.Close()
+
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(-1)

@@ -1,0 +1,27 @@
+echo
+echo " = = = = = = = = = = = = = = = = = = = = = = = = = ="
+echo "  ####  ####  ####  #### "
+echo "  #        #  #     #  # "
+echo "  #      ###   ##   ###  "
+echo "  #        #     #  # #  "
+echo "  ####  ####  ####  #  # "
+
+echo " Welcome to the Onnxruntime Agent container"
+echo "     worker - start the mq worker"
+echo "        run - start a local predict general"
+echo ""
+
+WORKER_COMMAND="onnxruntime-agent worker"
+alias worker=$WORKER_COMMAND
+echo $worker
+
+echo ""
+
+RUN_COMMAND="onnxruntime-agent predict general --model_name torchvision_alexnet --dataset_path /root/data/dataset/example.yaml"
+alias run=$RUN_COMMAND
+echo $RUN_COMMAND
+
+echo " - - - - - - - - - "
+
+# uncomment this if you want the container to automatically start the worker or any other command
+# worker

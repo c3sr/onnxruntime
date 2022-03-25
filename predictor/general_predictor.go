@@ -20,6 +20,7 @@ import (
 type GeneralPredictor struct {
 	common.Base
 	predictor *goonnxruntime.Predictor
+	desiredModality *dlframework.Modality
 }
 
 // NewGeneralPredictor ...
@@ -37,10 +38,6 @@ func NewGeneralPredictor(model dlframework.ModelManifest, os ...options.Option) 
 
 // Load ...
 func (p *GeneralPredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
-	framework, err := model.ResolveFramework()
-	if err != nil {
-		return nil, err
-	}
 
 	workDir, err := model.WorkDir()
 	if err != nil {
@@ -49,7 +46,7 @@ func (p *GeneralPredictor) Load(ctx context.Context, model dlframework.ModelMani
 
 	gp := &GeneralPredictor{
 		Base: common.Base{
-			Framework: framework,
+			Framework: *model.Framework,
 			Model:     model,
 			WorkDir:   workDir,
 			Options:   options.New(opts...),
@@ -140,7 +137,16 @@ func (p *GeneralPredictor) Close() error {
 
 // Modality ...
 func (p *GeneralPredictor) Modality() (dlframework.Modality, error) {
+  if p.desiredModality != nil {
+    return *p.desiredModality, nil
+  }
 	return dlframework.GeneralModality, nil
+}
+
+// This allows postprocess to use different output formats, however, the model has to output in
+// a format that the desired modality postprocess can handle
+func (p *GeneralPredictor) SetDesiredOutput(modality dlframework.Modality) {
+  p.desiredModality = &modality
 }
 
 func init() {
