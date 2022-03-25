@@ -3,7 +3,7 @@ CONTAINER_NAME=onnxruntime-agent-dev
 TODAY=`date -u +"%Y.%m.%d-%H.%M"`
 
 # If docker complains about disk space
-docker builder prune --force
+#docker builder prune --force
 
 docker build -t ${IMAGE_NAME}:$TODAY -t ${IMAGE_NAME}:latest .
 if [ $? -eq 0 ]; then
