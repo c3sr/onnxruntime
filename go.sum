@@ -185,6 +185,8 @@ github.com/c3sr/dlframework v1.4.10 h1:1Wp7bOTU1Kg6Sswn0/bgYq7FsMGXN3zTOixISWLcP
 github.com/c3sr/dlframework v1.4.10/go.mod h1:lapAyvalSBSSXAOaqoZudDxRFkzPjsfL65M7s0hu/wg=
 github.com/c3sr/dlframework v1.4.12 h1:ybi+pScTPAS58m7WTVwGQFn9uSZfUg6632PGGJ+vtms=
 github.com/c3sr/dlframework v1.4.12/go.mod h1:lapAyvalSBSSXAOaqoZudDxRFkzPjsfL65M7s0hu/wg=
+github.com/c3sr/dlframework v1.4.13 h1:ukZiq8YQ0mcaCpJUlTY1aGNqi/Ezc/hUmJPQmGz1Sds=
+github.com/c3sr/dlframework v1.4.13/go.mod h1:DrQ4IQ+nI5JZHua1hZqTyGcMbPyqs8MYUj+sttgHJ/s=
 github.com/c3sr/downloadmanager v1.0.0/go.mod h1:YqQ+Ps7QIjsu0vZ5DQekJfsZ5ferSd1r4Rr4wG6RmwI=
 github.com/c3sr/go-cupti v1.1.1 h1:nG9rjk3GF0OrrFPND4KvIbZVPYZedfu/EXnHtmrWVD0=
 github.com/c3sr/go-cupti v1.1.1/go.mod h1:mADduCp5wXtR73auvjH8ZcNrrb5+gI+1FyiqCaxjnNI=
@@ -209,6 +211,7 @@ github.com/c3sr/machine v1.0.0/go.mod h1:wGFA9Qvm21SfHkotkgmnzUk8iwpNagcc21ivBi6
 github.com/c3sr/monitoring v1.0.0/go.mod h1:lFzoEJO73ATZ5sLEkSxmih4XGvYq86Ohe9ObpXC8rKs=
 github.com/c3sr/mq v0.1.7 h1:IGyoLH+DSTxCfbUTvKP8ftPNFYyuiYB8EXvP2zd6C7A=
 github.com/c3sr/mq v0.1.7/go.mod h1:tgk50DzBcf4TP1XIzNLZuxjkSoCnh8/xhX3HoVx2evc=
+github.com/c3sr/mq v0.1.8/go.mod h1:tgk50DzBcf4TP1XIzNLZuxjkSoCnh8/xhX3HoVx2evc=
 github.com/c3sr/nvidia-smi v1.0.0/go.mod h1:xFfv2i0Aw0+0UKpO7KkmCyhQkLf9FkDD6xbgzsxJgEc=
 github.com/c3sr/nvidia-smi v1.0.2 h1:EAE+SvSMR/NOEwWOf0DRE0sebVi1FdDYM/3hAWNZLHY=
 github.com/c3sr/nvidia-smi v1.0.2/go.mod h1:xFfv2i0Aw0+0UKpO7KkmCyhQkLf9FkDD6xbgzsxJgEc=
