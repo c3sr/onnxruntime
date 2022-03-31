@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/c3sr/config v1.0.1
-	github.com/c3sr/dlframework v1.4.12
+	github.com/c3sr/dlframework v1.4.13
 	github.com/c3sr/go-onnxruntime v1.2.0
 	github.com/c3sr/logger v1.0.1
 	github.com/c3sr/tracer v1.0.5
