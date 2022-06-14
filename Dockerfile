@@ -2,7 +2,7 @@ FROM c3sr/go-onnxruntime:amd64-cpu-onnxruntime1.7.1-latest
 
 
 
-RUN wget https://bootstrap.pypa.io/pip/3.6/get-pip.py && python3 get-pip.py && pip3 install opencv-python==4.2.0.32 && pip3 install numpy && pip3 install torchvision && pip3 install scipy
+RUN wget https://bootstrap.pypa.io/pip/3.6/get-pip.py && python3 get-pip.py && pip3 install opencv-python==4.2.0.32 && pip3 install numpy && pip3 install torchvision===0.9.1 && pip3 install scipy
 
 
 # Make our go directory structure
