@@ -10,6 +10,6 @@ require (
 	github.com/c3sr/tracer v1.0.5
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/pkg/errors v0.9.1
-	github.com/sirupsen/logrus v1.8.1
+	github.com/sirupsen/logrus v1.8.3
 	gorgonia.org/tensor v0.9.14
 )
